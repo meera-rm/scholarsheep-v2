@@ -1,0 +1,74 @@
+
+   /* ButtonDropdown.css */
+
+.button-dropdown {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    justify-content: center;
+  }
+  
+  .single-button,
+  .dropdown-button {
+    padding: 4px 8px;
+    background-color:rgb(20 184 166);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 30px;
+    border:2px solid black;
+  }
+  
+  .dropdown {
+    position: relative;
+  }
+  
+  .dropdown-content {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    background-color:rgb(20 184 166) ;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1;
+    opacity: 0; /* Initially hide the dropdown */
+    pointer-events: none; /* Disable pointer events */
+    transition: opacity 0.2s ease-in-out; /* Add a slight delay */
+  }
+  
+  .dropdown-content button {
+    background-color: transparent;
+    color: #333;
+    border: none;
+    padding: 5px;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 20px;
+  }
+  
+  .dropdown-content button:hover {
+    background-color: rgb(49, 173, 159);
+  }
+  
+  .dropdown:hover .dropdown-content {
+    opacity: 1; /* Show the dropdown */
+    pointer-events: auto; /* Enable pointer events */
+  }
+  
+  /* Optional: Styling for active/hover states */
+  .single-button:hover,
+  .dropdown-button:hover {
+    background-color: rgb(20 184 166);
+  }
+  
+  .single-button:active,
+  .dropdown-button:active {
+    background-color: rgb(20 184 166);
+  }
+  

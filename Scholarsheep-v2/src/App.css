@@ -1,0 +1,117 @@
+/* :root {
+  --background: white;
+  --text-primary: black;
+  --text-secondary: royalblue;
+  --accent: purple;
+} */
+/* [data-theme='dark'] {
+  --background: black;
+  --text-primary: white;
+  --text-secondary: grey;
+  --accent: darkred;
+} */
+.switchTheneButton{
+  padding:5px 20px 0px 20px;
+}
+.searchIcon{
+  font-size:x-large;
+}
+
+[data-theme="light"] .App {
+  background-color: #ffffff;
+  color: #333333;
+}
+[data-theme="dark"] .App {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+[data-theme="dark"] .bg-gray-50 {
+  background-color: #0f172a;
+}
+[data-theme="dark"] .bg-white {
+  background-color: #1e293b;
+}
+[data-theme="dark"] .text-gray-800 {
+  color: #e2e8f0;
+}
+[data-theme="dark"] .text-gray-500 {
+  color: #94a3b8;
+}
+[data-theme="dark"] .text-gray-700 {
+  color: #cbd5e1;
+}
+[data-theme="dark"] .border-gray-200 {
+  border-color: #334155;
+}
+[data-theme="dark"] .bookCard {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+[data-theme="dark"] .bookCard__title {
+  color: #e2e8f0;
+}
+[data-theme="dark"] .bookshelfContainer {
+  border-color: #0f766e;
+}
+[data-theme="dark"] .bookshelf__title {
+  color: #e2e8f0;
+}
+[data-theme="dark"] .learningTools {
+  color: #94a3b8;
+}
+[data-theme="dark"] .learningTools__title {
+  color: #5eead4;
+}
+[data-theme="dark"] .learningTools__text h2 {
+  color: #e2e8f0;
+}
+[data-theme="dark"] .gradedReadersList__title {
+  color: #5eead4;
+}
+[data-theme="dark"] .books-title {
+  color: #5eead4;
+}
+[data-theme="dark"] .notes__title {
+  color: #5eead4;
+}
+[data-theme="dark"] .notes__text div:first-child {
+  color: #e2e8f0;
+}
+[data-theme="dark"] .searchBar__input {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+[data-theme="dark"] .cardSliderLeft {
+  color: #e2e8f0;
+  background: #1e293b;
+  border-color: #334155;
+}
+[data-theme="dark"] .cardSliderLeft__option {
+  color: #e2e8f0;
+  border-color: #e2e8f0;
+}
+[data-theme="dark"] .cardSliderRight {
+  color: #e2e8f0;
+  background: #1e293b;
+  border-color: #334155;
+}
+[data-theme="dark"] .cardSliderRight__option {
+  color: #e2e8f0;
+  border-color: #e2e8f0;
+}
+[data-theme="dark"] .rpscontent,
+[data-theme="dark"] .guessword,
+[data-theme="dark"] .paintapp,
+[data-theme="dark"] .memorygame,
+[data-theme="dark"] .etchsketch,
+[data-theme="dark"] .tictactoe {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  border-color: #0f766e;
+}
+[data-theme="dark"] .bg-teal-100 {
+  background-color: #134e4a;
+}
+[data-theme="dark"] .bg-cyan-50 {
+  background-color: #164e63;
+}

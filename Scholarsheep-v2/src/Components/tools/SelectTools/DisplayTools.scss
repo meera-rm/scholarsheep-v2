@@ -1,0 +1,110 @@
+.toolChoice {
+    &__selection {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        position: relative;
+    }
+
+    &__button {
+        width: 150px;
+        height: 50px;
+        text-align: center;
+        padding: 10px;
+        color: #999;
+        font-size: 1.4em;
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
+        background: transparent;
+        border: none;
+        margin-bottom: 0;
+
+        &:hover {
+            color: #667ee9;
+        }
+
+        &-active {
+            color: #03958e;
+            background: whitesmoke;
+            z-index: 2;
+            border: 4px solid transparent;
+            border-bottom: 4px solid whitesmoke;
+            border-image: linear-gradient(
+                90deg,
+                #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf,
+                #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf
+            ) 4;
+            border-image-outset: 0;
+            border-bottom-color: whitesmoke;
+            // border-image doesn't allow per-side override, so use clip-path on a pseudo to hide bottom
+
+            // Override: use outline approach instead
+            border: none;
+            padding: 6px 10px;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: -4px;
+                left: -4px;
+                right: -4px;
+                bottom: -1px;
+                border: 4px solid;
+                border-bottom: none;
+                border-image: linear-gradient(
+                    90deg,
+                    #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf,
+                    #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf
+                ) 4;
+                animation: flow-colors 3s linear infinite;
+                pointer-events: none;
+            }
+
+            // White strip to cover the bottom line under this tab
+            &::before {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: whitesmoke;
+                z-index: 3;
+            }
+        }
+    }
+
+    // Bottom rainbow line across the full width
+    &__selection::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        z-index: 1;
+        background: linear-gradient(
+            90deg,
+            #03958E, #5550AD, #B87666, #B8666B, #F1E984, #a664f0, #5195bf,
+            #03958E, #5550AD, #B87666, #B8666B, #F1E984, #a664f0, #5195bf
+        );
+        background-size: 200% 100%;
+        animation: flow-bg 3s linear infinite;
+    }
+}
+
+@keyframes flow-colors {
+    0%   { border-image: linear-gradient(90deg, #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf, #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf) 4; }
+    16%  { border-image: linear-gradient(90deg, #5195bf, #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf, #03958E, #5550AD, #B87666, #F1E984, #a664f0) 4; }
+    33%  { border-image: linear-gradient(90deg, #a664f0, #5195bf, #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf, #03958E, #5550AD, #B87666, #F1E984) 4; }
+    50%  { border-image: linear-gradient(90deg, #F1E984, #a664f0, #5195bf, #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf, #03958E, #5550AD, #B87666) 4; }
+    66%  { border-image: linear-gradient(90deg, #B87666, #F1E984, #a664f0, #5195bf, #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf, #03958E, #5550AD) 4; }
+    83%  { border-image: linear-gradient(90deg, #5550AD, #B87666, #F1E984, #a664f0, #5195bf, #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf, #03958E) 4; }
+    100% { border-image: linear-gradient(90deg, #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf, #03958E, #5550AD, #B87666, #F1E984, #a664f0, #5195bf) 4; }
+}
+
+@keyframes flow-bg {
+    0%   { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+}

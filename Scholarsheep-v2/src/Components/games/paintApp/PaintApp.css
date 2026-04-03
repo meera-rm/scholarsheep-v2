@@ -1,0 +1,31 @@
+/* PaintApp styles */
+
+  
+  .paint-app {
+    text-align: center;
+  }
+
+  
+  /* Tools component styles */
+  .tools {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Canvas component styles */
+  .canvas {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+  
+  /* Panel component styles */
+  .panel {
+    display: flex;
+    justify-content: center;
+  }
+  
+ 
+  
+  /* Add more specific styling as needed */
+  

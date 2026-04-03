@@ -1,0 +1,26 @@
+.cards {
+  margin: 0 auto;
+  width: 50%;
+}
+.cards > p {
+  margin-left: 1rem;
+}
+
+.show-btns {
+  padding: 1rem;
+  background: transparent;
+  border-radius: 1rem;
+  font-size: 1.3rem;
+}
+.show-btns:hover {
+  background: rgb(65, 194, 159);
+}
+.showNavigation {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 4rem 0;
+}
+.items {
+  padding: 0 0 0 1rem;
+}

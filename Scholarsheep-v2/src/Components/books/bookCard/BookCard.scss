@@ -1,0 +1,267 @@
+
+// @import "compass";
+// @import "breakpoint";
+
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:900');
+
+.container {
+	//  max-width: 100%;
+	// margin:20px auto;
+  // display: grid;
+  // grid-template-columns: auto auto auto auto;
+  // grid-gap: 10px;
+
+  margin-top: 15px;
+	padding:1.5%;
+  font-size: 17px; 
+  line-height: 1.4;
+}
+
+.bookCard {
+  	@media (max-width: 700px) {
+		width: 100%;
+	}
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  cursor: pointer;
+  height: 270px;
+  margin:  50px auto;
+  padding: 0px 20px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0.025);
+  position: relative;
+  text-align: center;
+  transition: height 1000ms;
+  width: 280px;
+  ;
+	
+  &.expanded {
+    height: 420px;
+  }
+
+  &__summary{
+    padding: 0px 10px;
+    margin:-10px auto 0 auto;
+    text-align:center;
+    &-list{
+      margin-top: 8px;
+    }
+  
+    &.expanded{
+       margin: 10px auto ;
+       height:500px;
+    }
+  }
+  
+
+&__image { 
+  width:200px;
+  height:180px;
+  margin: 30px auto 0 auto;
+  padding:15px 0;
+  text-align:center;
+  transform: translateY(10px);
+  transition: transform 1000ms;
+   z-index:1;
+  &.expanded {
+  transform: translateX(0); 
+ }  
+ 
+} 
+
+
+&__text {
+
+   clip-path: polygon(0% 100%, 0 -90%, 50% -5%, 100% -70%, 100% 100%);
+  -webkit-clip-path: polygon(0% 100%, 0 -90%, 50% -5%, 100% -90%, 100% 100%); 
+  transition: clip-path 1000ms;
+ 
+    z-index:2;
+  &.expanded {
+     clip-path:none;
+     // clip-path: polygon(0% 100%, 0 -100%, 50% -25%, 100% -100%, 100% 100%); 
+  }
+}
+  &__textcontent{
+   
+     position: absolute;
+     bottom: 0;
+     width: 100%;
+     margin: -120px -20px;
+    //  padding: 20px 10px;
+    // background-color: rgba(255, 255, 255, 0.8);
+     clip-path: polygon(0% 100%, 0 -90%, 100% -5%, 100% -90%, 100% 100%);
+  -webkit-clip-path: polygon(0% 100%, 0 -90%, 50% -5%, 100% -90%, 100% 100%); 
+  transition: clip-path 100ms;
+    transform: translateY(-108%);
+    transition: transform 0.5s ease-in-out;
+    &.expanded{
+      transform: translateY(0);
+    }
+  }
+  &__title{
+   font-family: 'Alegreya Sans', sans-serif;
+   font-weight: 800;
+   margin:0 auto;
+  //  margin: 10px 30px 0px -5px;
+  }
+&__chevron {
+  position: absolute;
+  bottom: 20px;
+  left: calc(50% - 15px);
+  transform-origin: 50%;
+  transform: rotate(180deg);
+  transition: transform 1000ms;
+  
+  &.expanded {
+    transform: rotate(0deg);
+    bottom:10px;
+  }
+}
+ &__textcontent {
+  transform: translateY(-140px);
+  transition: transform 1000ms;
+  
+   &.expanded {
+  transform: translateX(-15px);
+   }
+  }
+ }
+
+
+// * {
+//   @include transition-property(
+//     background-color,
+//     border-color,
+//     box-shadow,
+//     color,
+//     opacity,
+//     text-shadow,
+//     transform
+//   );
+//   @include transition-duration(0.2s);
+//   @include transition-timing-function(linear);
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// @import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:900');
+// body {
+//   align-items: center;
+//   display: flex;
+//   height: 100vh;
+//   justify-content: center;
+//   font-family: sans-serif;
+//   margin: 0;
+//   background: #6D6027;
+//   background: -webkit-linear-gradient(left, #D3CBB8, #6D6027);
+//   background: -o-linear-gradient(left, #D3CBB8, #6D6027);
+//   background: linear-gradient(to right, #D3CBB8, #6D6027);
+// }
+// .card {
+//    position: relative;
+//   background: white;
+//   border-radius: 8px;
+//   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+//   cursor: pointer;
+//   height: 300px;
+//   margin: 20px;
+//   padding: 0 20px;
+//   -webkit-tap-highlight-color: rgba(0,0,0,0.025);
+//   position: relative;
+//   text-align: center;
+//   transition: height 1000ms;
+//   width: 260px;
+  
+//   &.expanded {
+//     height: 400px;
+//   }
+
+//   &__bodytext{
+//     padding: 0px 10px;
+//     margin:0 auto;
+//     &.expanded{
+//        margin: 10px auto ;
+//     }
+//   }
+  
+  
+// &__image { 
+//   margin-top: 30px;
+//    transform: translateY(10px);
+//   transition: transform 1000ms;
+//   // z-index:1;
+//   &.expanded {
+//   transform: translateX(0); 
+//  }  
+// } 
+
+// &__text1 {
+
+//    clip-path: polygon(0% 100%, 0 -90%, 50% -5%, 100% -70%, 100% 100%);
+//   -webkit-clip-path: polygon(0% 100%, 0 -90%, 50% -5%, 100% -90%, 100% 100%); 
+//   transition: clip-path 1000ms;
+ 
+//    // z-index:2;
+//   &.expanded {
+//      clip-path:none;
+//      // clip-path: polygon(0% 100%, 0 -100%, 50% -25%, 100% -100%, 100% 100%); 
+//   }
+// }
+//   &__textcontent{
+   
+//     position: absolute;
+//     bottom: 0;
+//     width: 100%;
+//     padding: 5px 10px;
+//     // background-color: rgba(255, 255, 255, 0.8);
+//      clip-path: polygon(0% 100%, 0 -90%, 50% -5%, 100% -90%, 100% 100%);
+//   -webkit-clip-path: polygon(0% 100%, 0 -90%, 50% -5%, 100% -90%, 100% 100%); 
+//   transition: clip-path 100ms;
+//     transform: translateY(-108%);
+//     transition: transform 0.5s ease-in-out;
+//     &.expanded{
+//       transform: translateY(0);
+//     }
+//   }
+//   &__title{
+//     font-family: 'Alegreya Sans', sans-serif;
+//   font-weight: 800;
+//   margin: 10px 30px 10px -5px;
+//   }
+// &__chevron {
+//   position: absolute;
+//   bottom: 20px;
+//   left: calc(50% - 15px);
+//   transform-origin: 50%;
+//   transform: rotate(180deg);
+//   transition: transform 1000ms;
+  
+//   &.expanded {
+//     transform: rotate(0deg);
+//   }
+// }
+// // &__textcontent {
+// //  transform: translateY(-140px);
+// //  transition: transform 1000ms;
+  
+// //   &.expanded {
+// //  transform: translateX(-15px);
+// //   }
+// //  }
+// }

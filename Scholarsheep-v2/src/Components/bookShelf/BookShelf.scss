@@ -1,0 +1,195 @@
+$teal:#14B8A6;
+// $teal:#03958e;
+$darkblue: #0c347d;
+$umber: #54290c;
+$springer: #eded80;
+$darkgreen:#006400;
+$orange:#ff7f00;
+$darkorchid:#9932cc;
+$imperial:#602f6b;
+$deeppink: #ff1493;
+
+.header{
+  text-align:center;
+  color:#03958e;
+}
+.bookshelf {
+  height: 100%;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+
+@media screen and (max-width: 900px) {
+  .bookshelf{
+    width: 100%;
+   display:block;
+  }
+  
+}
+@media screen and (max-width: 600px) {
+  .bookshelf{
+    width: 50%;
+   display:block;
+  }
+  
+}
+
+.bookshelfContainer {
+  width: 450px;
+  height: 50%;
+  margin: 30px auto ;
+  border: 20px $teal solid;
+  overflow: hidden;
+  background-image: linear-gradient(
+    darken($teal, 32%),
+      darken($teal, 30%) 160px,
+     lighten($teal, 4%) 220px,
+    lighten($teal, 4%) 222px,
+    $teal 222px,
+    $teal 228px,
+     darken($teal, 4%) 228px,
+     darken($teal, 4%) 230px
+  );
+  @media screen and (max-width: 900px) {
+   
+     width: 375px;
+     display:block;
+     margin: 20px auto ;
+     border: 20px $teal solid;
+     .bookshelfbook-mobile{
+      display:none;
+    }
+    .bookshelfbook-tilted.bookshelfbook-umber{
+      display:none;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    
+    width: 375px;
+    display:block;
+    margin: 20px auto ;
+    border: 20px $teal solid;
+    .bookshelfbook-tilted.bookshelfbook-umber{
+      display:none;
+    }
+    .bookshelfbook-mobile{
+      display:none;
+    }
+    
+  }
+  &__title{
+    text-align:center;
+    font-size: 1.5em;
+    margin-top:-5px;
+    font-size:1em;
+    font-weight:600;
+    color:white;
+  }
+
+  // background-size: 10px 230px;
+    //box-shadow: 0px 1000px 0px 400px #7a7668;
+  //  z-index:-1;
+}
+
+.bookshelfbook {
+  height: 160px;
+  width: 37px;
+  float: left;
+  color: white;
+  padding:0 5px;
+  font-size: 0.9em;
+  font-family: Verdana, sans-serif;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  transition: transform 0.4s ease;
+}
+
+.bookshelfbook-tilted {
+  float: left;
+  width: 74px;
+}
+
+.bookshelfbook-tilted > .bookshelfbook {
+  transform: translateY(-3px) translateX(10px) rotate(5deg);
+}
+
+.bookshelfbook:hover {
+  transform: scale(1.05);
+}
+
+.bookshelfbook-green {
+  color:black;
+   background-color:$darkgreen;
+  // https://www.wilbooks.com/images/products/thumbs/2544.jpg
+  background-image: url('https://www.wilbooks.com/images/products/thumbs/2076.jpg');
+
+  border-left: 4px solid lighten(darkgreen, 4%);
+  border-right: 4px solid darken(#006400, 4%);
+}
+
+.bookshelfbook-blue {
+  color:black;
+  background-color: $darkblue;
+  background-image: url('https://www.wilbooks.com/images/products/thumbs/2217.jpg');
+  border-left: 4px solid lighten($darkblue, 4%);
+  border-right: 4px solid darken($darkblue, 4%);
+}
+
+.bookshelfbook-umber {
+  background-color: $umber;
+  background-image: url('https://www.wilbooks.com/images/products/thumbs/2657.jpg');
+  border-left: 4px solid lighten($umber, 4%);
+  border-right: 4px solid darken($umber, 4%);
+}
+
+.bookshelfbook-imperial {
+  background-color: $imperial;
+  background-image: url('https://www.wilbooks.com/images/products/thumbs/2029.jpg');
+  border-left: 4px solid lighten($imperial, 4%);
+  border-right: 4px solid darken($imperial, 4%);
+}
+.bookshelfbook-orange {
+  background-color: $orange;
+  background-image: url('https://www.wilbooks.com/images/products/thumbs/2450.jpg');
+  border-left: 4px solid lighten($orange, 4%);
+  border-right: 4px solid darken($orange, 4%);
+}
+
+.bookshelfbook-purple {
+  background-color: $darkorchid;
+  background-image: url('https://www.wilbooks.com/images/products/thumbs/2519.jpg');
+  border-left: 4px solid lighten($darkorchid, 4%);
+  border-right: 4px solid darken($darkorchid, 4%);
+}
+.bookshelfbook-springer {
+  background-color: $springer;
+  background-image: url('https://www.wilbooks.com/images/products/thumbs/2031.jpg');
+  border-left: 4px solid lighten($springer, 4%);
+  border-right: 4px solid darken($springer, 4%);
+  color: black;
+}
+.bookshelfbook-deeppink {
+  background-color: $deeppink;
+  background-image: url('https://www.wilbooks.com/images/products/thumbs/2570.jpg');
+  border-left: 4px solid lighten($deeppink, 4%);
+  border-right: 4px solid darken($deeppink, 4%);
+  color: black;
+}
+
+.bookshelfbook h2 {
+  padding: 0;
+  font-size: 1em;
+  transform-origin: 0% 0%;
+  transform: rotate(0.25turn) translateY(-35px);
+  width: 170px;
+}
+.heading2{ margin: 6px -10px;}
+.bookshelfbook h3 {
+  padding: 3px;
+  font-size: 0.7em;
+  transform-origin: 0 0;
+  transform: rotate(0.25turn) translateY(-15px) translateX(-20px);
+  width: 150px;
+}

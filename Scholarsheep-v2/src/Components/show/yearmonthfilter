@@ -1,0 +1,302 @@
+
+// https://codesandbox.io/s/sorting-filtering-pagination-de7v3?file=/src/Table.js:717-1417-great one
+
+// from chatgpt provided date from api data in the format yyyy-mm-dd  , write functions that filter year and month using react hooks
+
+import { useState, useEffect } from 'react';
+
+function DateFilter({ dates }) {
+  // Use the useState hook to store the current year and month filters
+  const [yearFilter, setYearFilter] = useState(null);
+  const [monthFilter, setMonthFilter] = useState(null);
+
+  // Use the useEffect hook to update the list of dates based on the current year and month filters
+  useEffect(() => {
+    let filteredDates = dates;
+    if (yearFilter) {
+      filteredDates = filteredDates.filter(
+        (date) => date.split('-')[0] === yearFilter
+      );
+    }
+    if (monthFilter) {
+      filteredDates = filteredDates.filter(
+        (date) => date.split('-')[1] === monthFilter
+      );
+    }
+    setFilteredDates(filteredDates);
+  }, [yearFilter, monthFilter]);
+
+  return (
+    <div>
+      <label>Year:</label>
+      <select
+        value={yearFilter}
+        onChange={(e) => setYearFilter(e.target.value)}
+      >
+        <option value={null}>All</option>
+        {[...new Set(dates.map((date) => date.split('-')[0]))].map((year) => (
+          <option key={year} value={year}>
+            {year}
+          </option>
+        ))}
+      </select>
+      <label>Month:</label>
+      <select
+        value={monthFilter}
+        onChange={(e) => setMonthFilter(e.target.value)}
+      >
+        <option value={null}>All</option>
+        {[...new Set(dates.map((date) => date.split('-')[1]))].map((month) => (
+          <option key={month} value={month}>
+            {month}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+<DateFilter dates={['2022-01-01', '2022-02-01', '2022-03-01', '2022-03-02']} />;
+
+// provided date from api data in the format yyyy-mm-dd  , write functions that filter year and month using react hooks
+
+// To filter a list of dates by year and month using React hooks, you can use the useState and useEffect hooks to store the current year and month filter, and update the list of dates accordingly. Here is an example of how you might implement this:
+
+// Copy code
+import { useState, useEffect } from 'react';
+
+function DateFilter({ dates }) {
+  // Use the useState hook to store the current year and month filters
+  const [yearFilter, setYearFilter] = useState(null);
+  const [monthFilter, setMonthFilter] = useState(null);
+
+  // Use the useEffect hook to update the list of dates based on the current year and month filters
+  useEffect(() => {
+    let filteredDates = dates;
+    if (yearFilter) {
+      filteredDates = filteredDates.filter(
+        (date) => date.split('-')[0] === yearFilter
+      );
+    }
+    if (monthFilter) {
+      filteredDates = filteredDates.filter(
+        (date) => date.split('-')[1] === monthFilter
+      );
+    }
+    setFilteredDates(filteredDates);
+  }, [yearFilter, monthFilter]);
+
+  return (
+    <div>
+      <label>Year:</label>
+      <select
+        value={yearFilter}
+        onChange={(e) => setYearFilter(e.target.value)}
+      >
+        <option value={null}>All</option>
+        {[...new Set(dates.map((date) => date.split('-')[0]))].map((year) => (
+          <option key={year} value={year}>
+            {year}
+          </option>
+        ))}
+      </select>
+      <label>Month:</label>
+      <select
+        value={monthFilter}
+        onChange={(e) => setMonthFilter(e.target.value)}
+      >
+        <option value={null}>All</option>
+        {[...new Set(dates.map((date) => date.split('-')[1]))].map((month) => (
+          <option key={month} value={month}>
+            {month}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+// This example includes two dropdown menus for selecting the year and month filters. The options in the dropdown menus are generated from the list of dates, and the useEffect hook is used to update the list of dates based on the selected filters.
+
+// You can then use this component by passing in a list of dates as a prop, like this:
+
+// Copy code
+<DateFilter dates={['2022-01-01', '2022-02-01', '2022-03-01', '2022-03-02']} />;
+// This will render two dropdown menus, one for selecting the year and one for selecting the month, and the list of dates will be filtered based on the selected filters.
+
+// continue to display the data in a table using react
+// To display the filtered dates in a table using React, you can use a combination of the useState and useEffect hooks to store the list of filtered dates, and a table component to render the data.
+
+// Here is an example of how you might implement this:
+
+// Copy code
+import { useState, useEffect } from 'react';
+
+function DateTable({ dates }) {
+  // Use the useState hook to store the list of filtered dates
+  const [filteredDates, setFilteredDates] = useState([]);
+
+  // Use the useEffect hook to update the list of filtered dates when the dates prop changes
+  useEffect(() => {
+    setFilteredDates(dates);
+  }, [dates]);
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {filteredDates.map((date) => (
+          <tr key={date}>
+            <td>{date}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+// This example includes a table with a single column for displaying the dates. The useEffect hook is used to update the list of filtered dates when the dates prop changes, and the table is rendered using the filteredDates state.
+
+// You can then use this component by passing in a list of dates as a prop, like this:
+
+// Copy code
+<DateTable dates={['2022-01-01', '2022-02-01', '2022-03-01', '2022-03-02']} />;
+
+// try this
+// https://codesandbox.io/s/sorting-filtering-pagination-de7v3?file=/src/Table.js:717-1417
+
+
+// jsfiddles to watch
+
+// http://jsfiddle.net/3bvL2qmr/1/--save and load image
+// https://jsfiddle.net/ourcodeworld/akLtL5xm/5/--points
+// http://jsfiddle.net/jF9a6/-   crayon
+// http://jsfiddle.net/d9BPz/546/-rectangles multiple
+// http://jsfiddle.net/NpDdt/10/-draw lines
+// https://jsfiddle.net/richardcwc/wdf9cocz/-draw ellipse
+// http://jsfiddle.net/xkmqz9ho/-draw multiple rectangles
+// http://jsfiddle.net/9UyxF/
+
+
+// https://bearnithi.com/2019/12/12/understanding-canvas-draw-a-line-in-canvas-using-mouse-and-touch-events-in-javascript/
+// https://www.codicode.com/art/undo_and_redo_to_the_html5_canvas.aspx
+// https://www.codicode.com/art/how_to_draw_on_a_html5_canvas_with_a_mouse.aspx
+
+// https://enlight.nyc/projects/web-paint
+// https://www.youtube.com/watch?v=wCwKkT1P7vY(bananacoding)
+// https://www.demo2s.com/javascript/html-canvas-drawing-text.html
+// http://jsfiddle.net/MartinThoma/vSDTW/2/-example for mobile phones
+// https://bencentra.com/code/2014/12/05/html5-canvas-touch-events.html-example for mobile phones
+// https://stackoverflow.com/questions/53960651/how-to-make-an-undo-function-in-canvas?noredirect=1&lq=1
+// https://stackoverflow.com/questions/65430818/how-do-you-draw-a-line-from-the-last-position-of-the-mouse-to-the-present-positi
+// https://codesource.io/build-a-drawing-app-with-and-vuejs-html5-canvas/
+// https://stackoverflow.com/questions/1077041/refresh-image-with-a-new-one-at-the-same-url
+// https://wanago.io/2019/06/24/creating-a-simple-drawing-app-using-canvas-saving-and-loading-images/
+// https://ourcodeworld.com/articles/read/117/top-5-best-sketchpads-and-manually-drawing-on-canvas-javascript-and-jquery-plugins
+// https://codepen.io/JAGATHISH1123/pen/EzLooM
+// https://www.demo2s.com/javascript/html-canvas-drawing-text.html
+// https://stackoverflow.com/questions/49006488/how-to-draw-circle-on-canvas-on-mouse-move
+
+
+// canvas youtube videos to check out
+// https://www.youtube.com/results?search_query=HTML5+Canvas+-+Drawing+application+%234
+// https://www.youtube.com/watch?v=1Pl0A3ZhGwA
+// https://www.youtube.com/results?search_query=HTML5+Canvas+-+Drawing+application+%234
+// https://www.youtube.com/watch?v=wCwKkT1P7vY
+// https://www.youtube.com/watch?v=3GqUM4mEYKA&t=212s
+// https://www.youtube.com/watch?v=FLESHMJ-bI0-react by maksim
+
+// https://www.youtube.com/watch?v=Baz5tVRc6EA
+// https://www.youtube.com/watch?v=XbS2bLMzcrk&list=PLfdtiltiRHWHfOVfqI89Nc3xUMY-q-7f0&index=3
+
+// mintbean app projects
+// https://github.com/trieule50?tab=repositories
+// https://github.com/BernardN38/eightball-react
+// https://github.com/kornatskyi/easel
+// https://github.com/macktsawyer/betweenthelines/blob/master/src/Canvas.js
+// https://github.com/codewithbingle/colormylife
+// https://gist.github.com/prof3ssorSt3v3/e5ab6eafa42decbf2d2d7c7f2e383f39
+// https://drawbrite.netlify.app/
+// https://martvelous.netlify.app/
+// https://heuristic-bassi-502429.netlify.app/#team
+
+
+
+
+// RANGE SLIDER IN REACT
+//https://codesandbox.io/s/dazzling-galileo-01g0g?file=/src/App.js
+// https://ahdev2020.medium.com/how-to-create-range-slider-in-react-9392a123f8fb
+// import React,{useState,useEffect} from "react";
+// import "./styles.css";
+// export default function App() {
+//   const [value,onChange]=useState(1);
+//   useEffect(()=>{
+//       const ele = document.querySelector('.buble');
+//     if (ele) {
+//       ele.style.left = `${Number(value / 4)}px`;
+//     }
+//   })
+//   return (
+//     <div className="slider-parent">
+//       <input type="range" min="1" max="500" value={value}
+//          onChange={({ target: { value: radius } }) => {
+//                     onChange(radius);
+//                   }}
+//       />
+//       <div className="buble"> 
+//       {value}
+//       </div>
+//     </div>
+//   );
+// }
+
+//https://codesandbox.io/s/react-slider-k868o?from-embed=&file=/src/App.js:0-492
+// import { useState } from "react";
+// import "./styles.css";
+
+// const MAX = 10;
+
+// export default function App() {
+//   const [value, setValue] = useState(0);
+
+//   const getBackgroundSize = () => {
+//     return { backgroundSize: `${(value * 100) / MAX}% 100%` };
+//   };
+
+//   return (
+//     <div className="App">
+//       <input
+//         type="range"
+//         min="0"
+//         max={MAX}
+//         onChange={(e) => setValue(e.target.value)}
+//         style={getBackgroundSize()}
+//         value={value}
+//       />
+//     </div>
+//   );
+//https://github.com/cojapacze/sketchpad- the best plugin
+//https://github.com/taiseen/react-paint-app
+//https://github.com/meera-ramesh19/allfiles/blob/main/minbeanhackathon/canvaspaintappfunctions.txt
+
+//https://github.com/uzair-ashraf/paint-clone-js-hacks-1
+//https://github.com/uzochukwueddie/react-slider/blob/master/src/slider/Slider.js
+//https://github.com/macktsawyer/betweenthelines/blob/master/src/Toolbar.js
+//https://github.com/kornatskyi/easel(full stack)
+//https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258
+//https://www.newline.co/courses/newline-guide-to-painting-on-canvas-with-react/canvas-api-and-main-react-hooks
+//https://codesandbox.io/s/react-184y0?file=/src/App.js
+//https://github.com/dsleylian/paint
+//https://github.com/codeAdrian/react-magic-painter
+//https://github.com/DarrickFauvel/petri-paint
+//https://www.freecodecamp.org/news/learn-react-hooks-by-building-a-paint-app/
+
+
+
+
+
+// Guided ReadingLevel Pdf link
+//https://www.wilbooks.com/free-online-books-guided-reading-level
+//https://www.the-best-childrens-books.org/guided-reading-levels.html

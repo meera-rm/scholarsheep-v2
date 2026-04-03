@@ -1,0 +1,50 @@
+.timerContainer {
+  margin: 50px auto;
+  display: block;
+}
+
+.timerHeader {
+  text-align: center;
+}
+
+.timerTitle {
+  margin: 50px auto;
+  display: flex;
+  gap: 20px;
+  justify-content: space-evenly;
+}
+
+.timerWrapper {
+  margin: 50px auto;
+  display: flex;
+  gap: 20px;
+  justify-content: space-evenly;
+}
+.shortbreak,
+.longbreak,
+.session {
+  display: flex;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+
+.timer {
+  text-align: center;
+  display: block;
+}
+
+.timer-left {
+  margin: 10px 0;
+}
+.startStopButtons {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  gap: 10px;
+}
+
+.start_stop,
+.reset {
+  margin: 10px 0;
+  text-align: center;
+}

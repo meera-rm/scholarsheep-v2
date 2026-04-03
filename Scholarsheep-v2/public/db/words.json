@@ -1,0 +1,48 @@
+[
+    {
+         "temptation":{  
+            "grade": "2nd Grade",
+            "partsofspeech": "noun",
+            "meaning": [
+                "The act of tempting",
+                "The condition of being tempted.",
+                "Something attractive, tempting or seductive; an inducement or enticement.",
+                "Pressure applied to your thinking designed to create wrong emotions which will eventually lead to wrong actions. "  
+            ],
+            "example":[
+                ""
+            ],
+            "synonym":[],
+            "antonynm":["fitna"],
+            "id": "1"
+           
+        },
+        "corrupt":{
+        
+                    "grade":"1st Grade",
+                  
+                    "partsofspeech": "verb",
+                    "meaning": [
+                        "To make corrupt; to change from good to bad; to draw away from the right path; to deprave; to pervert.",
+                        "",
+                        "To become putrid, tainted, or otherwise impure; to putrefy; to rot.",
+                        "To debase or make impure by alterations or additions; to falsify. ", 
+                        "aste, spoil, or consume; to make worthless." ,
+                        "In a depraved state; debased; perverted; morally degenerate; weak in morals.",
+                        "Abounding in errors; not genuine or correct; in an invalid state.",
+                        "In a putrid state; spoiled; tainted; vitiated; unsound."
+                    ],
+                    "example":[
+                      "to corrupt a book",
+                      "The government here is corrupt, so we'll emigrate to escape them.",
+                      "It turned out that the program was corrupt - that's why it wouldn't open."
+                    ],
+                    "synonym":[""],
+                    "antonynm":["corrupted"],
+                    "id": "2"
+                   
+                }
+            }
+   
+
+        ]

@@ -1,0 +1,46 @@
+.gradedReadersList {
+    padding: 10px;
+    font-family: Roboto, sans-serif;
+
+    &__title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      padding-bottom: 15px;
+      text-align: center;
+      color: #03958e;
+    }
+
+    &__container {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      & > * {
+        padding: 0 5px;
+      }
+      @media screen and (max-width: 600px) {
+        width: 100%;
+        display: block;
+        text-align: center;
+       }
+    }
+  
+    // &__item {
+    //   border-radius: 50%;
+    //   width: 200px;
+    //   height: 200px;
+    //   position: relative;
+    //   text-align: center;
+    //   border: 3px solid #0a96e6;
+    //   color: white;
+    //   img {
+    //     width: 80%;
+    //     position: absolute;
+    //     top: 0;
+    //     bottom: 0;
+    //     left: 0;
+    //     right: 0;
+    //     margin: auto;
+    //   }
+    // }
+  }
+  

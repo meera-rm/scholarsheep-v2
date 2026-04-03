@@ -1,0 +1,22 @@
+.readersListItem{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    text-align: center;
+    border: 3px solid  #38b2ac; 
+    color: white;
+    img {
+      width: 70%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+    
+    @media screen and (max-width: 600px) {
+    margin:40px auto;
+     }
+  }

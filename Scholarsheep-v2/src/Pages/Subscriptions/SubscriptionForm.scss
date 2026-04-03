@@ -1,0 +1,165 @@
+
+
+.emailSubscriptionForm {
+  margin: 100px auto 0 auto;
+  width: 420px;
+  height: 700px;
+  font-family: Elena, -apple-system, BlinkMacSystemFont, Roboto, roboto slab,
+    droid serif, segoe ui, system-ui, Arial, sans-serif;
+  background-color: #4cbfb9;
+  text-align: center;
+  // z-index:-1;
+ 
+
+  &__image {
+   
+    width: 300px;
+    height: 300px;
+    margin:-140px auto 0px auto;
+    // z-index:10;
+    border-radius:50%;
+  }
+
+  &__newsletter {
+    color: #d33a2c;
+    width: 280px;
+    background: white;
+    margin: 10px auto 10px auto;
+    padding: 10px;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  &__header {
+    width: 350px;
+    font-weight: 600;
+    font-size: 1.5em;
+    margin: 0 auto;
+  }
+  &__content {
+    width: 340px;
+    line-height: 1.5;
+    font-size: 1.1em;
+    font-weight: 400;
+    margin: 20px auto;
+    text-align: center;
+    &-link {
+      color: #0168b8;
+    }
+  }
+  &__label {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__name{
+    // margin-left:-140px;
+    // margin-bottom:10px;
+    padding: 20px ;
+    border: 1px solid black;
+    width: 160px;
+    border-radius:15px 0 0 15px;
+    cursor:pointer;
+    &:focus {
+      border: 1px solid black;
+      outline:none;
+      cursor:pointer;
+    }
+    &::placeholder {
+      color: black;
+      font-size: 1.5em;
+    }
+  }
+  &__email{
+    padding: 20px;
+    border: 1px solid black;
+    // width: 180px;
+    width:160px;
+    border-radius: 0  15px 15px  0 ;
+    cursor:pointer;
+    &:focus {
+      border: 1px solid black;
+      outline:none;
+    }
+    &::placeholder {
+      color: black;
+      font-size: 1.5em;
+    }
+  }
+  &__button {
+    display:flex;
+    gap:10px;
+    background-color: #0168b8;
+    color: white;
+    width: 140px;
+    border: none;
+    padding: 17px;
+    font-size: 1.2em;
+    margin:15px 0;
+    // border-radius: 0 15px 15px 0;
+    border-radius:15px;
+    cursor:pointer;
+  }
+  &__error{
+    margin:0 auto;
+    border:4px solid red;
+    font-size:1.6rem;
+    font-weight:600;
+    width:300px;
+    font-family:cursive;
+  }
+
+  &__success{
+    margin:0 auto;
+    border:4px solid green;
+    font-size:1.6rem;
+    font-weight:600;
+    width:300px;
+    font-family:cursive;
+  }
+
+  &__unsubscribe {
+    margin: 10px auto;
+    cursor:pointer;
+    border:none;
+    outline:none;
+    background-color: #0168b8;
+    padding:10px;
+    border-radius:10px;
+    color:white;
+    
+  }
+  &__smallText {
+    margin-top: 10px;
+    font-size: 0.8em;
+    font-style: italics;
+    color: #666;
+    &-link {
+      text-decoration: underline;
+    }
+  }
+  &__statusButton{
+    font-weight:bold;
+    background-color:#439b96;
+    border:2px solid #0c6561;
+    color:white;
+    // width:auto;
+    padding:10px;
+  }
+  &__editsubscribe{
+    margin:0px 10px;
+    background-color: #0168b8;
+    padding:10px;
+    border-radius:10px;
+    color:white;
+  }
+  &__buttongroup{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+  }
+}
+
+

@@ -1,0 +1,29 @@
+.explore{
+    // text-align:center;
+    // font-size:2em;
+    // font-weight:600;
+    margin-bottom:100px;
+    
+    &__container{
+        display:block;
+        justify-content:center;
+        align-items: center;
+        width: 600px;
+        margin: 0 auto;
+        // p {
+        //     width: 200px;
+        //     margin: 0 auto
+        // }
+    }
+   
+}
+
+.testbooklist {
+    display: flex;
+    gap: 15px;
+}
+.testbook {
+    height: 150px;
+    width: 100px;
+    border: 1px solid black;
+}

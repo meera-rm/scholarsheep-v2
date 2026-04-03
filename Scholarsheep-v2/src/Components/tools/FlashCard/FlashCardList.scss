@@ -1,0 +1,116 @@
+
+
+.listCards {
+  display: grid;
+  grid-template-rows: 1fr;
+  justify-content: center;
+  padding-bottom: 3rem;
+  grid-template-columns: repeat(3,  1fr);
+  gap:20px;
+  margin:20px 0 20px 20px;
+}
+
+.listCards-message{
+  justify-content: center;
+}
+.listCard {
+  display: flex;
+  perspective: 40rem;
+  width: 400px;
+  height: auto;
+  transition: z-index, transform calc(0.707s/ 4);
+  transition-delay: 0.707s, 0s;
+  text-decoration: none;
+  color: inherit;
+  z-index: 0;
+  line-height: 1.3;
+  font-family: sans-serif;
+  &:hover {
+    transition-delay: 0s;
+    z-index: 1;
+  }
+
+  &:active {
+    transform: scale(0.975);
+  }
+}
+
+.listCard-body {
+  border-radius: 0.25rem;
+  // flex: 1;
+  display: flex;
+  transform-style: preserve-3d;
+  transition: 0.707s transform;
+
+  .listCard:hover &,
+  .listCard:focus & {
+    transform: rotateX(-180deg);
+  }
+}
+
+.listCard-front,
+.listCard-back {
+  @extend .shadow;
+  display: block;
+  align-items: center;
+  background-color: white;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  border-radius: 0.25rem;
+  backface-visibility: hidden;
+  min-width: 100%;
+}
+
+.listCard-front {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.listCard-back {
+  transform: rotateX(-180deg) translate(-100%, 0);
+}
+
+.shadow {
+  box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.04), 0 2px 2px rgba(0, 0, 0, 0.04),
+    0 4px 4px rgba(0, 0, 0, 0.04), 0 8px 8px rgba(0, 0, 0, 0.04),
+    0 16px 16px rgba(0, 0, 0, 0.04);
+ }
+
+
+
+ 
+
+/* // .card {
+//   width: 400px;
+//   height: 400px;
+//   position: relative;
+//   perspective: 1500px;
+
+//   &__back,
+//   &__front {
+//     position: absolute;
+//     width: 100%;
+//     height: 100%;
+//     -webkit-backface-visibility: hidden;
+//     backface-visibility: hidden;
+//     text-align: center;
+//     color: white;
+//     transition: all 5s linear;
+//   }
+//   &__back {
+//     background: #0d9488;
+//     transform: rotateX(-180deg);
+//     padding:0 20px;
+//   }
+//   &__front {
+//     background: #0d9488;
+//   }
+
+//   &:hover &__front {
+//     transform: rotateX(180deg);
+//   }
+
+//   &:hover &__back {
+//     transform: rotateX(0deg);
+//   }
+// } */

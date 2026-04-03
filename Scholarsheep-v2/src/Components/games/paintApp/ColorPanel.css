@@ -1,0 +1,410 @@
+/* 
+.container {
+    width: 450px;
+    height: 100vh;
+    background: grey;
+    border: 2px solid gray;
+    position: relative;
+  }
+  
+  /* https://www.joshwcomeau.com/animation/css-transitions/ *
+  
+  .move {
+      background-color: #000;
+      color: #fff;
+      height: 100px;
+      position: absolute;
+      bottom: -50px; 
+      left:5%;
+      /* -webkit-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out; *
+      transition: all 0.4s ease-in-out;
+      width: 400px;
+     
+  }
+  .move:hover {
+      bottom: 10px;
+      height:260px;
+  } 
+  
+  .color-swatch {
+    margin:10px auto;
+    display:block;
+    width:200px;
+    
+  }
+  /* .color-selected{
+    width:400px;
+    backgroundColor:${color};
+    width:20px;
+    height:'10px';
+    border:'2px solid black';
+  }
+   *
+  .color-button {
+    margin:10px auto;
+    position: absolute;
+    left: 40%;
+    transform: translateY(-10%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+  }
+  
+  .color-list {
+    width:350px;
+  /*   margin:0 auto; */
+/*   top: 10px;
+    right: 30px;  *
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px -65px  10px -65px;
+    /* border: 1px solid #ccc; *
+    background-color: transparent;
+  }
+  
+  .color-item {
+    width: 30px;
+    height: 30px;
+    margin: 4px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  
+    
+  
+  .popup {
+    position: absolute;
+    bottom: -100%; /* Start below the container *
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.5s forwards;
+  }
+  
+  @keyframes slideUp {
+    to {
+      bottom: 0; /* Slide up to show the popup *
+    }
+  } */
+/* 
+
+input[type='range'] {
+  margin-left: 10px; /* Adjust the margin as needed *
+}
+
+.panelContainer {
+  width: 400px;
+  height: 100vh;
+  background: #fff;
+  border: 2px solid black;
+  position: relative;
+  margin: 0 auto;
+}
+.color-buttonblock {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+.brushPanel {
+  /* margin: 10px;
+  text-align: center; *
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.brushsize {
+  border: 2px solid black;
+  margin: -820px 340px;
+  height: 50px;
+  
+}
+/* https://www.joshwcomeau.com/animation/css-transitions/ *
+
+.move {
+  background-color: #000;
+  color: #fff;
+  height: 35px;
+  position: absolute;
+  bottom: -50px;
+  left:0;
+  /* left: 20%; */
+  /* -webkit-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out; *
+  transition: all 0.4s ease-in-out;
+  width: 400px;
+  /* position: absolute;
+  bottom: -50px; 
+  left:5%;
+  width: 360px;
+  background-color:grey;
+  padding: 20px; *
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.5s forwards;
+  transform-origin: top;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(0%);
+}
+.move:hover {
+  bottom: 10px;
+  height: 260px;
+  transform: translateY(0);
+}
+
+.color-swatch {
+  margin: 10px 25%;
+  display: block;
+  width: 200px;
+}
+.color-selected {
+  width: 400px;
+  /* backgroundColor:${color}; *
+  width: 20px;
+  height: 10px;
+  border: 2px solid black;
+}
+
+.color-button {
+  margin: 6px auto;
+  position: absolute;
+  left: 40%;
+  transform: translateY(-10%);
+  background-color: transparent;
+  border: 1px solid grey;
+  color: white;
+  padding: 1px 5px;
+}
+
+.color-list {
+  width: 350px;
+  /*   margin:0 auto; */
+  /*   top: 10px;
+  right: 30px;  *
+  display: flex;
+  flex-wrap: wrap;
+   margin: 20px -65px 10px -65px; 
+   border: 1px solid #ccc; 
+  background-color: transparent;
+}
+
+.color-item {
+  width: 30px;
+  height: 30px;
+  margin: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.popup {
+  position: absolute;
+  bottom: -100%; /* Start below the container *
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  /* padding: 20px; *
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.5s forwards;
+}
+
+@keyframes slideUp {
+  to {
+    bottom: 0; /* Slide up to show the popup *
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; *
+  align-items:flex-start;
+  justify-content:flex-start;
+  width: 5px; /* fixed width *
+}
+
+.input-wrapper > input {
+  margin: -700px 340px;
+  transform: rotate(-90deg);
+}*/
+
+
+
+/* Styles for mobile-first design */
+
+
+
+/* Panel Container */
+.panelContainer {
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  border: 2px solid black;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Color Button Block */
+.color-buttonblock {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+ 
+}
+
+/* Brush Panel */
+.brushPanel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Brush Size */
+.brushsize {
+  border: 2px solid black;
+  margin-top: 10px; /* Adjust margin for spacing */
+  height: auto;
+  padding: 5px 10px;
+  background-color:rgb(20 184 166);
+}
+
+/* Move */
+.move {
+  background-color: #000;
+  color: #fff;
+  height: 35px;
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  transition: all 0.4s ease-in-out;
+  width: 100%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.5s forwards;
+  transform-origin: top;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(0%);
+}
+
+/* Hover Effect for Move */
+.move:hover {
+  bottom: 10px;
+  height: 260px;
+  transform: translateY(0);
+}
+
+/* Color Swatch */
+.color-swatch {
+  margin: 10px auto;
+  display: block;
+  width: 100%;
+}
+
+/* Color Selected */
+.color-selected {
+  left:25%;
+  width: 20px;
+  height: 10px;
+  border: 2px solid black;
+}
+
+/* Color Button */
+.color-button {
+  margin: 6px auto;
+  position: absolute;
+  left: 40%;
+  transform: translateY(-10%);
+  background-color: transparent;
+  border: 1px solid grey;
+  color: white;
+  padding: 1px 5px;
+}
+
+/* Color List */
+.color-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  background-color: transparent;
+}
+
+/* Color Item */
+.color-item {
+  width: 25px;
+  height: 25px;
+  margin: 7px;
+  border: none;
+  cursor: pointer;
+}
+
+.clear-button, .save-button{
+  width: 70px;
+  height: 40px;
+  padding:5px 10px;
+  border:2px solid black;
+  background-color: rgb(20 184 166);
+}
+/* Popup */
+.popup {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.5s forwards;
+}
+
+/* Keyframes for SlideUp Animation */
+@keyframes slideUp {
+  to {
+    bottom: 0;
+  }
+}
+
+/* Input Wrapper */
+.input-wrapper {
+  display: flex;
+  /* flex-direction: column;*/
+  align-items: center;
+  justify-content: center; 
+  width: 100%;
+  gap:10px;
+ 
+}
+
+/* Input Range */
+.input-wrapper > input {
+  margin-top: 10px;
+  /* transform: rotate(-90deg); */
+
+}
+
+/* Input Range Styles */
+input[type='range'] {
+  margin-left: 10px;
+}
+
+/* Media Query for Larger Screens */
+@media (min-width: 768px) {
+  /* Adjust styles for larger screens */
+  .panelContainer {
+    width: 800px;
+    margin: 0 auto;
+  }
+  /* Add more styles as needed */
+  .move {
+    width: 50%; /* Adjust the width for larger screens */
+    left:25%;
+    /* transform: translateX(15%); */
+  }
+  .color-item {
+    width: 35px;
+    height: 35px;
+    margin: 4px;
+   
+  }
+}
