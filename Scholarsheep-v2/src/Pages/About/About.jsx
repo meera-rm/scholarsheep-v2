@@ -63,7 +63,7 @@ const About = () => {
               <div className='flex'>
                 <div className='flex gap-4'>
                   <a
-                    href='https://github.com'
+                    href='https://github.com/meera-rm'
                     aria-label='Homepage'
                     className='footer-octicon'
                     title='GitHub'
