@@ -3,10 +3,8 @@ import Loading from './Loading';
 import Profile from './Profile';
 
 const REPO_NAMES = [
-  'CapstoneGroup5',
-  'CapstoneGroup5Backend',
-  'CapstoneGroup5-v2',
-  'CapstoneGroup5-v2-backend',
+  'Scholarsheep-v2',
+  'Shcolarsheep-v2-backend'
 ];
 
 function AllReposInfo() {
