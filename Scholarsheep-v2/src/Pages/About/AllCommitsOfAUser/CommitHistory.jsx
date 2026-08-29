@@ -15,7 +15,7 @@ function CommitHistory() {
         for (const repo of repos) {
           try {
             const res = await fetch(
-              `https://api.github.com/repos/meera-ramesh19/${repo}/commits?per_page=5`
+              `https://api.github.com/repos/meera-rm/${repo}/commits?per_page=5`
             );
             if (res.ok) {
               const data = await res.json();
