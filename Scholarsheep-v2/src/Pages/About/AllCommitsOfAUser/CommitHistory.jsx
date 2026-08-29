@@ -9,7 +9,7 @@ function CommitHistory() {
     const fetchCommits = async () => {
       try {
         // Try v2 repo first, fall back to original
-        const repos = ['CapstoneGroup5-v2', 'CapstoneGroup5'];
+        const repos = ['Scholarsheep-v2', 'Shcolarsheep-v2-backend'];
         let allCommits = [];
 
         for (const repo of repos) {
