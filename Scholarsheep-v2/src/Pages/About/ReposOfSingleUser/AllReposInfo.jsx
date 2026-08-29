@@ -10,7 +10,7 @@ const REPO_NAMES = [
 function AllReposInfo() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [user] = useState('meera-ramesh19');
+  const [user] = useState('meera-rm');
 
   useEffect(() => {
     const fetchRepos = async () => {
