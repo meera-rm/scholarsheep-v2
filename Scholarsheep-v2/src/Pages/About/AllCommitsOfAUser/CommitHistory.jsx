@@ -9,7 +9,7 @@ function CommitHistory() {
     const fetchCommits = async () => {
       try {
         // Try v2 repo first, fall back to original
-        / Both frontend and backend live in the same repo, in separate folders.
+        // Both frontend and backend live in the same repo, in separate folders.
         // We use GitHub's `path` param to scope commits to each folder.
         const paths = [
           { label: 'Scholarsheep-v2', path: 'Scholarsheep-v2' },
