@@ -9,19 +9,30 @@ function CommitHistory() {
     const fetchCommits = async () => {
       try {
         // Try v2 repo first, fall back to original
-        const repos = ['Scholarsheep-v2', 'Shcolarsheep-v2-backend'];
+        / Both frontend and backend live in the same repo, in separate folders.
+        // We use GitHub's `path` param to scope commits to each folder.
+        const paths = [
+          { label: 'Scholarsheep-v2', path: 'Scholarsheep-v2' },
+          { label: 'Shcolarsheep-v2-backend', path: 'Shcolarsheep-v2-backend' },
+        ];
+
         let allCommits = [];
 
-        for (const repo of repos) {
+        for (const { label, path } of paths) {
           try {
             const res = await fetch(
-              `https://api.github.com/repos/meera-rm/${repo}/commits?per_page=5`
+              `https://api.github.com/repos/meera-rm/Scholarsheep-v2/commits?per_page=5&path=${path}`
             );
             if (res.ok) {
               const data = await res.json();
-              allCommits = [...allCommits, ...data.map((c) => ({ ...c, repo }))];
+              allCommits = [
+                ...allCommits,
+                ...data.map((c) => ({ ...c, repo: label })),
+              ];
             }
-          } catch { /* skip */ }
+          } catch {
+            /* skip */
+          }
         }
 
         // Sort by date, newest first
