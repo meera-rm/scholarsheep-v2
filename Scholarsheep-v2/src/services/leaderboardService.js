@@ -5,8 +5,16 @@
 import api from '../utils/axiosInstance';
 import { isDemoMode } from './demoAuthService';
 import * as local from './readingLogLocal';
+import { getToken, decodeToken } from '../utils/tokenManager';
 
 const useApi = () => !isDemoMode();
+
+function getCurrentUserRole() {
+  const token = getToken();
+  if (!token) return null;
+  const decoded = decodeToken(token);
+  return decoded?.role || decoded?.user_role || null;
+}
 
 export async function getLeaderboard(period = 'alltime', sortBy = 'books') {
   if (useApi()) {
@@ -34,8 +42,10 @@ function getLocalLeaderboard(period, sortBy) {
   const sessions = local.getAllSessions();
   const completed = books.filter((b) => b.status === 'completed');
 
+  const isReadingStudent = getCurrentUserRole() === 'student' && completed.length > 0;
+
   const demoStudents = [
-    { name: 'You', avatar: '', books: completed.length, pages: completed.reduce((s, b) => s + (b.pageCount || 0), 0), streak: 0 },
+    ...(isReadingStudent ? [{ name: 'You', avatar: '', books: completed.length, pages: completed.reduce((s, b) => s + (b.pageCount || 0), 0), streak: 0 }] : []),
     { name: 'Celia Edward', avatar: 'https://api.dicebear.com/7.x/pixel-art/svg?seed=Zoey', books: Math.max(0, completed.length + 3), pages: 450, streak: 12 },
     { name: 'Jade Duncan', avatar: 'https://api.dicebear.com/7.x/pixel-art/svg?seed=Lucy', books: Math.max(0, completed.length + 1), pages: 320, streak: 7 },
     { name: 'Barry Lioudis', avatar: 'https://api.dicebear.com/7.x/pixel-art/svg?seed=Zoe', books: Math.max(0, completed.length - 1), pages: 180, streak: 3 },
