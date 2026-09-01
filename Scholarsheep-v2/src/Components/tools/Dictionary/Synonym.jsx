@@ -4,7 +4,7 @@ const Synonym = ({ mean }) => {
       {mean.map((val) =>
         val.meanings.map((means) =>
           means.definitions.map((def) => {
-            return def.synonyms.map((syn) => <li>{syn}</li>);
+            return (def.synonyms || []).map((syn) => <li key={syn}>{syn}</li>);
           })
         )
       )}
