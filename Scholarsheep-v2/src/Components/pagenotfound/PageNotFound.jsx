@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // import Button from 'react-bootstrap/Button';
 // import Modal from 'react-bootstrap/Modal';
 import React from 'react';
-import errorpage from './page404.jpg';
+import errorpage from './page404.webp';
 import errormonster from './monster.jpg';
 const PageNotFound = () => {
   // const [show, setShow] = useState(false);

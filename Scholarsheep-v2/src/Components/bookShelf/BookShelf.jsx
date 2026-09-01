@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './BookShelf.scss';
-import headerText from './readerscornertext.png';
+import headerText from './readerscornertext.webp';
 
 const BookShelf = () => {
   return (

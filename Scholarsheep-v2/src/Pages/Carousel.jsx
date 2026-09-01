@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AiOutlineVerticalRight, AiOutlineVerticalLeft } from 'react-icons/ai';
 
-import img8 from '../Components/asset/imagine8copy.jpg';
+import img8 from '../Components/asset/imagine8copy.webp';
 import r10 from '../Components/asset/read10.jpeg';
 import r11 from '../Components/asset/read11.jpeg';
 import r13 from '../Components/asset/read13.jpeg';
 import r14 from '../Components/asset/read14.jpeg';
 import r15 from '../Components/asset/read15.jpeg';
 import r16 from '../Components/asset/read16.webp';
-import r17 from '../Components/asset/childread.png';
+import r17 from '../Components/asset/childread.webp';
 const featuredProducts = [r10, r17, r13, img8, r11, r14, r15, r16];
 
 let count = 0;

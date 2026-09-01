@@ -7,7 +7,7 @@ import BookShelf from '../../bookShelf/BookShelf';
 import CardSlider from '../../cardSlider/CardSlider';
 import ApiBookSearch from './ApiBookSearch';
 import './BookCardList.scss';
-import homebackground from './homebackground.png';
+import homebackground from './homebackground.webp';
 
 const BookCardList = () => {
   return (

@@ -5,7 +5,7 @@ import './LearningTools.scss';
 import words from '../db/words.json';
 import tremble from './tremble.png';
 import dictionary from './dictionary.png';
-import vocabimg from './vocabimg.png';
+import vocabimg from './vocabimg.webp';
 
 const LearningTools = ({tools}) => {
 

@@ -4,7 +4,7 @@ import axios from 'axios';
 import GradeSelector from '../gradeSelector/GradeSelector';
 import AutoMenuSelector from '../menuSelector/AutoMenuSelector';
 import './Explore.scss';
-import gradebanner from '../gradebanner.png';
+import gradebanner from '../gradebanner.webp';
 
 const options = [
   'All Grades',

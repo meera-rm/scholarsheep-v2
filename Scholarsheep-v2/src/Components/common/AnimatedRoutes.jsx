@@ -1,80 +1,80 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import ProtectedRoute from '../auth/ProtectedRoute';
 
 // PAGES
-import FourOFour from '../../Pages/FourOFour';
 import Home from '../../Pages/Home';
-import About from '../../Pages/About/About';
-import Contact from '../../Pages/Contact';
-import BookCardList from '../books/booksCardList/BookCardList';
-import NewBooks from '../../Pages/Books/NewBook';
-import ShowBooks from '../../Pages/Books/ShowBooks';
-import EditBooks from '../../Pages/Books/EditBooks';
-import Dictionary from '../tools/Dictionary/Dictionary';
-import FlashCard from '../tools/FlashCard/FlashCard';
-import AddVocab from '../tools/Vocabulary/AddVocab';
-import Timer from '../pomodoro/MyTimer';
+const FourOFour = lazy(() => import('../../Pages/FourOFour'));
+const About = lazy(() => import('../../Pages/About/About'));
+const Contact = lazy(() => import('../../Pages/Contact'));
+const BookCardList = lazy(() => import('../books/booksCardList/BookCardList'));
+const NewBooks = lazy(() => import('../../Pages/Books/NewBook'));
+const ShowBooks = lazy(() => import('../../Pages/Books/ShowBooks'));
+const EditBooks = lazy(() => import('../../Pages/Books/EditBooks'));
+const Dictionary = lazy(() => import('../tools/Dictionary/Dictionary'));
+const FlashCard = lazy(() => import('../tools/FlashCard/FlashCard'));
+const AddVocab = lazy(() => import('../tools/Vocabulary/AddVocab'));
+const Timer = lazy(() => import('../pomodoro/MyTimer'));
 
-import Games from '../games/AllGames/Games';
-import RockpaperScissor from '../games/rps/RockpaperScissor';
-import EtchSketch from '../temp/EtchSketch';
-import MemoryGame from '../games/memorygame/MemoryGame';
-import PaintApp from '../games/paintApp/PaintApp';
-import GuessWord from '../games/guessword/GuessWord';
-import TicTacToe from '../temp/TicTacToe';
-import CasualReading from '../books/bookCard/CasualReading';
-import ReadingLevelBooks from '../books/bookCard/ReadingLevelBooks';
+const Games = lazy(() => import('../games/AllGames/Games'));
+const RockpaperScissor = lazy(() => import('../games/rps/RockpaperScissor'));
+const EtchSketch = lazy(() => import('../temp/EtchSketch'));
+const MemoryGame = lazy(() => import('../games/memorygame/MemoryGame'));
+const PaintApp = lazy(() => import('../games/paintApp/PaintApp'));
+const GuessWord = lazy(() => import('../games/guessword/GuessWord'));
+const TicTacToe = lazy(() => import('../temp/TicTacToe'));
+const CasualReading = lazy(() => import('../books/bookCard/CasualReading'));
+const ReadingLevelBooks = lazy(() => import('../books/bookCard/ReadingLevelBooks'));
 
-import TeacherIndex from '../../Pages/Teacher/TeacherIndex';
-import TeacherNew from '../../Pages/Teacher/TeacherNew';
-import TeacherShow from '../../Pages/Teacher/TeacherShow';
-import TeacherEdit from '../../Pages/Teacher/TeacherEdit';
+const TeacherIndex = lazy(() => import('../../Pages/Teacher/TeacherIndex'));
+const TeacherNew = lazy(() => import('../../Pages/Teacher/TeacherNew'));
+const TeacherShow = lazy(() => import('../../Pages/Teacher/TeacherShow'));
+const TeacherEdit = lazy(() => import('../../Pages/Teacher/TeacherEdit'));
 
-import StudentIndex from '../../Pages/Student/StudentIndex';
-import StudentNew from '../../Pages/Student/StudentNew';
-import StudentShow from '../../Pages/Student/StudentShow';
-import StudentEdit from '../../Pages/Student/StudentEdit';
+const StudentIndex = lazy(() => import('../../Pages/Student/StudentIndex'));
+const StudentNew = lazy(() => import('../../Pages/Student/StudentNew'));
+const StudentShow = lazy(() => import('../../Pages/Student/StudentShow'));
+const StudentEdit = lazy(() => import('../../Pages/Student/StudentEdit'));
 
-import AddSubscription from '../subscriptions/AddSubscription';
-import ListSubscription from '../subscriptions/ListSubscription';
-import EditEmailModal from '../subscriptions/EditEmailModal';
+const AddSubscription = lazy(() => import('../subscriptions/AddSubscription'));
+const ListSubscription = lazy(() => import('../subscriptions/ListSubscription'));
+const EditEmailModal = lazy(() => import('../subscriptions/EditEmailModal'));
 
-import PrivacyPolicy from '../../Pages/PrivacyPolicy';
-import ParentDashboard from '../../Pages/ParentDashboard';
+const PrivacyPolicy = lazy(() => import('../../Pages/PrivacyPolicy'));
+const ParentDashboard = lazy(() => import('../../Pages/ParentDashboard'));
 
-import Notes from '../note/Notes';
-import NewNotes from '../note/NewNotes';
-import UpdateNotes from '../note/UpdateNotes';
-import ShowNotes from '../note/ShowNotes';
-import NotesHome from '../note/NotesHome';
+const Notes = lazy(() => import('../note/Notes'));
+const NewNotes = lazy(() => import('../note/NewNotes'));
+const UpdateNotes = lazy(() => import('../note/UpdateNotes'));
+const ShowNotes = lazy(() => import('../note/ShowNotes'));
+const NotesHome = lazy(() => import('../note/NotesHome'));
 
-import IndexComments from '../../Pages/Comment/IndexComments';
-import NewComment from '../../Pages/Comment/NewComment';
-import ShowComments from '../../Pages/Comment/ShowComments';
-import EditComments from '../../Pages/Comment/EditComments';
+const IndexComments = lazy(() => import('../../Pages/Comment/IndexComments'));
+const NewComment = lazy(() => import('../../Pages/Comment/NewComment'));
+const ShowComments = lazy(() => import('../../Pages/Comment/ShowComments'));
+const EditComments = lazy(() => import('../../Pages/Comment/EditComments'));
 
 // New auth pages
-import Login from '../../Pages/Login.jsx';
-import Register from '../../Pages/Register.jsx';
-import Unauthorized from '../../Pages/Unauthorized.jsx';
-import TeacherDashboard from '../../Pages/TeacherDashboard.jsx';
-import StudentDashboard from '../../Pages/StudentDashboard.jsx';
+const Login = lazy(() => import('../../Pages/Login.jsx'));
+const Register = lazy(() => import('../../Pages/Register.jsx'));
+const Unauthorized = lazy(() => import('../../Pages/Unauthorized.jsx'));
+const TeacherDashboard = lazy(() => import('../../Pages/TeacherDashboard.jsx'));
+const StudentDashboard = lazy(() => import('../../Pages/StudentDashboard.jsx'));
 
 // Reading Log & Stats pages
-import MyBooks from '../../Pages/ReadingLog/MyBooks.jsx';
-import AddBook from '../../Pages/ReadingLog/AddBook.jsx';
-import BookProgress from '../../Pages/ReadingLog/BookProgress.jsx';
-import MyStats from '../../Pages/Stats/MyStats.jsx';
-import MyStickerCase from '../../Pages/Awards/MyStickerCase.jsx';
+const MyBooks = lazy(() => import('../../Pages/ReadingLog/MyBooks.jsx'));
+const AddBook = lazy(() => import('../../Pages/ReadingLog/AddBook.jsx'));
+const BookProgress = lazy(() => import('../../Pages/ReadingLog/BookProgress.jsx'));
+const MyStats = lazy(() => import('../../Pages/Stats/MyStats.jsx'));
+const MyStickerCase = lazy(() => import('../../Pages/Awards/MyStickerCase.jsx'));
 
 // Leaderboard, Book Clubs
-import ClassLeaderboard from '../../Pages/Leaderboard/ClassLeaderboard.jsx';
-import MyBookClubs from '../../Pages/BookClubs/MyBookClubs.jsx';
-import BookClubDetail from '../../Pages/BookClubs/BookClubDetail.jsx';
-import CreateBookClub from '../../Pages/BookClubs/CreateBookClub.jsx';
-import ReadingPartners from '../../Pages/BookClubs/ReadingPartners.jsx';
+const ClassLeaderboard = lazy(() => import('../../Pages/Leaderboard/ClassLeaderboard.jsx'));
+const MyBookClubs = lazy(() => import('../../Pages/BookClubs/MyBookClubs.jsx'));
+const BookClubDetail = lazy(() => import('../../Pages/BookClubs/BookClubDetail.jsx'));
+const CreateBookClub = lazy(() => import('../../Pages/BookClubs/CreateBookClub.jsx'));
+const ReadingPartners = lazy(() => import('../../Pages/BookClubs/ReadingPartners.jsx'));
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -83,6 +83,7 @@ const AnimatedRoutes = () => {
     <div>
       <main>
         <AnimatePresence>
+          <Suspense fallback={null}>
           <Routes location={location} key={location.pathname}>
             {/* ===== PUBLIC ROUTES ===== */}
             <Route path='/' element={<Home />} />
@@ -217,6 +218,7 @@ const AnimatedRoutes = () => {
             {/* 404 */}
             <Route path='*' element={<FourOFour />} />
           </Routes>
+          </Suspense>
         </AnimatePresence>
       </main>
     </div>
