@@ -7,7 +7,8 @@ const { allWords, getAWord, createWord, updateWord, deleteWord } = require('../q
 dictionary.get('/lookup/:word', async (req, res) => {
   try {
     const { data } = await axios.get(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(req.params.word)}`
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(req.params.word)}`,
+      { timeout: 8000 }
     );
     res.status(200).json(data);
   } catch (error) {
