@@ -15,6 +15,7 @@ books.get('/', async (req, res) => {
     const allBooks = await getAllBooks();
     res.status(200).json({ success: true, payload: allBooks });
   } catch (error) {
+    console.error('GET /api/books failed:', error);
     res.status(404).json({ success: false, message: 'No books found' });
   }
 });
