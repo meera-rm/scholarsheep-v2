@@ -44,7 +44,7 @@ const PersonalDictionary = ({ inputWord, words, setWords }) => {
   const fetchWordMeaning = async () => {
     try {
       const response = await axios.get(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${inputWord}`
+        `${API}/api/dictionary/lookup/${inputWord}`
       );
       console.log(response.data);
       const data = response.data;

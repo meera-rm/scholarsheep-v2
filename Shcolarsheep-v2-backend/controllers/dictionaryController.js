@@ -1,6 +1,22 @@
 const express = require('express');
+const axios = require('axios');
 const dictionary = express.Router();
 const { allWords, getAWord, createWord, updateWord, deleteWord } = require('../queries/dictionary');
+
+// Proxies the free Dictionary API (which has no CORS headers) so the frontend can call it.
+dictionary.get('/lookup/:word', async (req, res) => {
+  try {
+    const { data } = await axios.get(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(req.params.word)}`
+    );
+    res.status(200).json(data);
+  } catch (error) {
+    if (error.response) {
+      return res.status(error.response.status).json(error.response.data);
+    }
+    res.status(502).json({ title: 'Lookup failed', message: 'Could not reach dictionary service' });
+  }
+});
 
 dictionary.get('/', async (req, res) => {
   try {

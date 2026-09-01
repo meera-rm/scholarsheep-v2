@@ -15,9 +15,9 @@ const SearchResult = ({ searchWord, setSearchWord }) => {
   const fetchData = async (word) => {
     try {
       setLoading(true);
-      //const res= httpService.get(
-        const res = await httpService.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-     
+      const API_URL = import.meta.env.VITE_API_URL || 'https://scholarsheep.onrender.com';
+      const res = await httpService.get(`${API_URL}/api/dictionary/lookup/${word}`);
+
       console.log(res);
       setData(res);
       setError(null);

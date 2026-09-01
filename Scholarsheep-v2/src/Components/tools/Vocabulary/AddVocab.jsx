@@ -36,9 +36,9 @@ const AddVocab = () => {
     }
 
     try {
-      // 1. Fetch word meaning from the free dictionary API
+      // 1. Fetch word meaning via backend proxy (avoids CORS on the free dictionary API)
       const dictResponse = await axios.get(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${inputWord.trim()}`
+        `${API}/api/dictionary/lookup/${inputWord.trim()}`
       );
       const data = dictResponse.data;
 
