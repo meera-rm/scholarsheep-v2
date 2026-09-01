@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import httpService from '../httpService';
+import api from '../../utils/axiosInstance';
 import { MdAddComment } from 'react-icons/md';
 import Modal from '../features/Modal';
-const API = process.env.REACT_APP_API_URL;
 
 const LogEntry = ({ log, index ,student}) => {
   console.log('log',log,student.teachers_id)
@@ -17,9 +15,8 @@ const LogEntry = ({ log, index ,student}) => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    //  httpService
-    axios
-      .get(`${API}/api/comments/logs/${log.log_id}`)
+    api
+      .get(`/api/comments/logs/${log.log_id}`)
       .then((response) => {
         console.log(response.data.payload);
         setComment(response.data.payload);

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import EditSubscriptions from './EditSubscription';
-
-const API = process.env.REACT_APP_API_URL;
 
 const currentSubs = ({
   setShowModal,
@@ -19,14 +17,11 @@ const currentSubs = ({
   const navigate = useNavigate();
 
  
-  const handleUnsubscribe =  () => {
-    
+  const handleUnsubscribe = async () => {
     try {
-      // Send a request to your server to unsubscribe the user
-      const res =  axios.get(`${API}/api/subscriptions/subscribe/${currentEmail}`);
-       if(res.ok)
+      const res = await api.delete(`/api/subscriptions/unsubscribe/${currentEmail}`);
 
-      if (res === 'success') {
+      if (res.data.success) {
         // Handle a successful unsubscribe
         setStatus('UNSUBSCRIBED'); // You can set your own status for unsubscribed state
         // Additional actions or notifications can be added here
@@ -37,7 +32,7 @@ const currentSubs = ({
         // Handle an unsuccessful unsubscribe
         setError('Unsubscribe failed');
         // Additional error handling can be added here
-      
+
       }
     } catch (error) {
       // Handle any errors that occur during the unsubscribe process
@@ -68,8 +63,8 @@ const currentSubs = ({
                 Are you sure you want to unsubscribe ?
                 <input
                   type='email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={currentEmail}
+                  onChange={(e) => setCurrentEmail(e.target.value)}
                   placeholder='Enter your email'
                   className='border p-2 mt-3'
                 />

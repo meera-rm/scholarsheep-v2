@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const StudentDetails = () => {
   const [student, setStudent] = useState({});
@@ -12,13 +10,13 @@ const StudentDetails = () => {
   let { id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`${API}/api/students/${id}`)
+    api
+      .get(`/api/students/${id}`)
       .then((response) => setStudent(response.data.payload))
       .catch(() => navigate('/not-found'));
 
-    axios
-      .get(`${API}/api/students/${id}/logs`)
+    api
+      .get(`/api/students/${id}/logs`)
       .then((response) => setLogData(response.data.payload || []))
       .catch(() => setLogData([]));
   }, [id, navigate]);
@@ -30,7 +28,7 @@ const StudentDetails = () => {
       const map = {};
       for (const log of logData) {
         try {
-          const res = await axios.get(`${API}/api/comments/logs/${log.log_id}`);
+          const res = await api.get(`/api/comments/logs/${log.log_id}`);
           if (res.data.payload) {
             map[log.log_id] = res.data.payload.teacher_comments;
           }
@@ -43,8 +41,8 @@ const StudentDetails = () => {
 
   const handleDelete = () => {
     if (!window.confirm(`Delete student ${student.student_name}?`)) return;
-    axios
-      .delete(`${API}/api/students/${id}`)
+    api
+      .delete(`/api/students/${id}`)
       .then(() => navigate('/students'))
       .catch((e) => console.error(e));
   };

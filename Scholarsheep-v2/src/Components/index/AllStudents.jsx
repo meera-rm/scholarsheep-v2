@@ -1,15 +1,13 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const AllStudents = () => {
   const [students, setStudents] = useState([]);
   let { teacherId } = useParams();
 
   useEffect(() => {
-    axios.get(`${API}/api/students`)
+    api.get('/api/students')
       .then((response) => setStudents(response.data.payload || []))
       .catch((e) => console.error('catch', e));
   }, []);

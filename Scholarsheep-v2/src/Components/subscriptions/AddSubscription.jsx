@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const AddSubscription = ({
   editing,
@@ -100,10 +98,7 @@ const AddSubscription = ({
     }
 
     try {
-     
-      // const res = httpService.post(
-        const res = await axios.post(`${API}/api/subscriptions `,newSubscription );
-     
+      const res = await api.post('/api/subscriptions', newSubscription);
 
       console.log(res.data,res.status);
 

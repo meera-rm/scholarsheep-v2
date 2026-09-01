@@ -1,11 +1,10 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FcSpeaker } from 'react-icons/fc';
 import Antonym from './Antonym';
 import Example from './Example';
 import Meanings from './Meanings';
 import Synonym from './Synonym';
-import httpService from '../../httpService';
+import api from '../../../utils/axiosInstance';
 
 const SearchResult = ({ searchWord, setSearchWord }) => {
   const [data, setData] = useState(null);
@@ -15,11 +14,10 @@ const SearchResult = ({ searchWord, setSearchWord }) => {
   const fetchData = async (word) => {
     try {
       setLoading(true);
-      const API_URL = import.meta.env.VITE_API_URL || 'https://scholarsheep.onrender.com';
-      const res = await httpService.get(`${API_URL}/api/dictionary/lookup/${word}`);
+      const res = await api.get(`/api/dictionary/lookup/${word}`);
 
-      console.log(res);
-      setData(res);
+      console.log(res.data);
+      setData(res.data);
       setError(null);
     } catch (err) {
       setError(err);

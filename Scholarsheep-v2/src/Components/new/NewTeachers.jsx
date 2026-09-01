@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import PhotoUpload from '../common/PhotoUpload';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const NewTeachers = () => {
   const navigate = useNavigate();
@@ -35,7 +33,7 @@ const NewTeachers = () => {
     event.preventDefault();
     console.log('inhandlesumbit', teacher);
     // httpService
-    axios.post(`${API}/api/teachers/new`, {
+    api.post('/api/teachers/new', {
         ...teacher,
         teacher_avatar: teacher.teacher_avatar || `https://api.dicebear.com/7.x/personas/svg?seed=${encodeURIComponent(teacher.teacher_name || 'teacher')}`,
       })

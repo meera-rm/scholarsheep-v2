@@ -1,10 +1,8 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 // import Table from 'react-bootstrap/Table';
 import Student from './Student.jsx';
-import httpService from '../httpService.jsx';
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const AllLogs = () => {
   const [logData, setLogData] = useState([]);
@@ -15,7 +13,7 @@ const AllLogs = () => {
 
   useEffect(() => {
     // httpService
-    axios.get(`${API}/api/logs`)
+    api.get('/api/logs')
       // .then((response) => console.log(response.data))
       .then((response) => setLogData(response.data))
       .catch((e) => console.error('catch', e));
@@ -30,8 +28,8 @@ const AllLogs = () => {
   // }, [logData]);
 
   useEffect(() => {
-    //  httpService 
-    axios.get(`${API}/api/students`)
+    //  httpService
+    api.get('/api/students')
       // console.log(response.data.payload))
       .then((response) => {
         setStudentData(response.data);

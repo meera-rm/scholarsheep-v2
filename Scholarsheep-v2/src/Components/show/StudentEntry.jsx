@@ -1,12 +1,10 @@
 import React ,{useState} from 'react';
 import { Link ,useNavigate  } from 'react-router-dom';
-import axios from 'axios';
-import httpService from '../httpService';
+import api from '../../utils/axiosInstance';
 import { MdDelete } from 'react-icons/md';
 import { MdTableView } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
 import { MdAddComment } from 'react-icons/md';
-const API = process.env.REACT_APP_API_URL;
 
 const StudentEntry=({student})=>{
     const [message, setMessage] = useState(true);
@@ -33,8 +31,7 @@ const StudentEntry=({student})=>{
   //Delete functions
   const handleDelete = (studentId) => {
    
-    // httpService
-    axios.delete(`${API}/api/students/${studentId}`)
+    api.delete(`/api/students/${studentId}`)
       .then(() => {
         navigate('/students');
       })

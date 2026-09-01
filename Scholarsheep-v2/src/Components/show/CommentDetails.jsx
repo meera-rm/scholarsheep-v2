@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-// import httpService from '../httpService';
+import api from '../../utils/axiosInstance';
 import { AiFillDelete } from 'react-icons/ai';
 import { BsPencilSquare } from 'react-icons/bs';
 import { BiArrowBack } from 'react-icons/bi';
 // import  AllLogs from './AllLogs'
-
-const API = process.env.REACT_APP_API_URL;
 
 const CommentDetails = () => {
   const [comment, setComment] = useState([]);
@@ -17,8 +14,7 @@ const CommentDetails = () => {
   let { id } = useParams();
 
   useEffect(() => {
-    // httpService
-    axios.get(`${API}/api/logs/${id}`)
+    api.get(`/api/logs/${id}`)
       .then((response) => {
         setComment(response.data);
       })
@@ -27,8 +23,7 @@ const CommentDetails = () => {
 
   //Delete functions
   const handleDelete = () => {
-    // httpService
-    axios.delete(`${API}/api/comments/${id}`)
+    api.delete(`/api/comments/${id}`)
       .then(() => {
         navigate('/comments');
       })

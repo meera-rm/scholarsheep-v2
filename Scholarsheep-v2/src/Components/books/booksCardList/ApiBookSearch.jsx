@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useBookSearch } from '../../../hooks/useBookSearch';
 import { addBook } from '../../../services/readingLogService';
 import { useAuth } from '../../../context/AuthContext';
 import { toast } from 'react-toastify';
-
-const API = import.meta.env.VITE_API_URL || process.env.REACT_APP_API_URL;
+import api from '../../../utils/axiosInstance';
 
 const READING_LEVELS = [
   'A','B','C','D','E','F','G','H','I','J','K','L','M',
@@ -46,7 +44,7 @@ const ApiBookSearch = () => {
     }
     setSaving(true);
     try {
-      await axios.post(`${API}/api/books/new`, {
+      await api.post('/api/books/new', {
         book_title: book.title,
         book_author: book.author,
         isbn_number: book.isbn || '',

@@ -1,12 +1,10 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Toggle from '../Toggle.jsx';
 import { Link } from 'react-router-dom';
 import BookCard from './BookCard';
 import BookLoader from '../../loader/BookLoader';
 import SearchAndFilter from './SearchAndFilter.jsx';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const alphabets = [
   'A',
@@ -50,8 +48,8 @@ const ReadingLevelBooks = () => {
   ]);
 
   useEffect(() => {
-    axios
-      .get(`${API}/api/books`)
+    api
+      .get('/api/books')
       //  .then((response) => console.log(response.data))
       .then((response) => {
         setBookData(response.data.payload);

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-import httpService from '../../Components/httpService';
+import api from '../../utils/axiosInstance';
 
 function ListSubscription() {
   const [subscriptions, setSubscriptions] = useState([]);
@@ -9,8 +8,8 @@ function ListSubscription() {
   useEffect(() => {
     async function fetchSubscriptions() {
       try {
-        const response = await axios.get('/subscriptions');
-        setSubscriptions(response.data);
+        const response = await api.get('/api/subscriptions');
+        setSubscriptions(response.data.payload || []);
       } catch (error) {
         console.error('Error fetching subscriptions:', error);
       }
@@ -21,7 +20,7 @@ function ListSubscription() {
 
   const handleDelete = async (email) => {
     try {
-      httpService.delete(`/subscriptions/${email}`);
+      await api.delete(`/api/subscriptions/unsubscribe/${email}`);
       setSubscriptions(subscriptions.filter((sub) => sub.email !== email));
     } catch (error) {
       console.error('Error deleting subscription:', error);

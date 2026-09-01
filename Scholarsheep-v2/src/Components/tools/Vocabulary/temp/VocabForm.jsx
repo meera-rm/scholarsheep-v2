@@ -7,13 +7,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import DisplayCardList from '../DisplayCardList';
 import PersonalDictionary from './PersonalDictionary';
 import httpService from '../../../httpService';
+import api from '../../../../utils/axiosInstance';
 import './AddVocabForm.scss';
 
 import { Link } from 'react-router-dom';
 
 const grades = ['K', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-
-const API = process.env.REACT_APP_API_URL;
 
 const VocabForm = ({ showCards, setShowCards }) => {
   // console.log('in addvocabfprn', words);
@@ -35,9 +34,9 @@ const VocabForm = ({ showCards, setShowCards }) => {
   //check if the word exists in the personal dictionary
   const checkPersonalDictionary = async () => {
     try {
-      const response = await httpService.get(`${API}/api/dictionary/`);
-      setWords(response.payload);
-      const data = response.payload;
+      const response = await api.get('/api/dictionary/');
+      setWords(response.data.payload);
+      const data = response.data.payload;
 
       if (data) {
         setPartOfSpeech(data.partOfSpeech);
@@ -54,8 +53,8 @@ const VocabForm = ({ showCards, setShowCards }) => {
   };
 
   const checkUser = async () => {
-    const user = await httpService.get(`${API}/api/users/:email`);
-    setUserId(user);
+    const user = await api.get('/api/users/:email');
+    setUserId(user.data);
   };
 
   useEffect(() => {
@@ -105,7 +104,7 @@ const VocabForm = ({ showCards, setShowCards }) => {
       users_id: userId,
     };
 
-    httpService
+    api
       .post('/api/dictionary', newWord)
       .then((response) => {
         // Handle success response

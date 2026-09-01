@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
  import EditSubscription from './EditSubscription';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const EditEmailModal = ({
   editing,
@@ -60,7 +58,7 @@ const EditEmailModal = ({
   const handleEmailCheckChange = () => {
     setEmailUpdated(true);
 
-    const response = axios.get(`${API}/api/subscriptions/subscribe/${email}`);
+    const response = api.get(`/api/subscriptions/subscribe/${email}`);
     console.log(response.data)
 
   .then((response) => {
@@ -78,7 +76,7 @@ const EditEmailModal = ({
     console.log(currentEmail);
     try {
       // Send a request to your server to unsubscribe the user
-      const res = await axios.get(`${API}/api/subscriptions`);
+      const res = await api.get('/api/subscriptions');
 
       let data = res.data.payload;
       console.log(data);

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../utils/axiosInstance';
 import ReactHtmlParser from 'html-react-parser';
 import DOMPurify from 'dompurify';
-
-const API = process.env.REACT_APP_API_URL;
 
 const ShowNotes = () => {
   const [note, setNote] = useState(null);
@@ -12,15 +10,15 @@ const ShowNotes = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`${API}/api/notes/${id}`)
+    api.get(`/api/notes/${id}`)
       .then((response) => setNote(response.data.payload))
       .catch(() => navigate('/not-found'));
   }, [id, navigate]);
 
   const handleDelete = () => {
     if (!window.confirm('Delete this note?')) return;
-    axios
-      .delete(`${API}/api/notes/${id}`)
+    api
+      .delete(`/api/notes/${id}`)
       .then(() => navigate('/notes'))
       .catch((e) => console.error(e));
   };

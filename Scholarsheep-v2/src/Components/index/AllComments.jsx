@@ -1,10 +1,7 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-// import httpService from './httpService';
+import api from '../../utils/axiosInstance';
 // import Table from 'react-bootstrap/Table';
-
-const API = process.env.REACT_APP_API_URL;
 
 const AllLogs = () => {
   const [comments, setComments] = useState([]);
@@ -12,9 +9,7 @@ const AllLogs = () => {
   let { logId } = useParams();
 
   useEffect(() => {
-    // httpService
-    axios.get(`${API}/api/comments`)
-      // .then((response) => console.log(response.data))
+    api.get('/api/comments')
       .then((response) => setComments(response.data))
       .catch((e) => console.error('catch', e));
   }, [logId]);

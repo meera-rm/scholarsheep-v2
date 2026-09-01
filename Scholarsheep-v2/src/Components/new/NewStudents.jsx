@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import PhotoUpload from '../common/PhotoUpload';
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const NewStudents = (props) => {
   const navigate = useNavigate();
@@ -33,8 +32,8 @@ const NewStudents = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post(`${API}/api/students/new`, {
+    api
+      .post('/api/students/new', {
         ...student,
         student_image: student.student_avatar,
       })

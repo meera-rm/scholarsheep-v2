@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './SubscriptionForm.scss';
 import logoImage from '../../Components/asset/sheeplogo.png';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +8,6 @@ import EditSubscription from '../../Components/subscriptions/EditSubscription';
 import EditEmailModal from '../../Components/subscriptions/EditEmailModal';
 
 import { ToastContainer, toast } from 'react-toastify';
-const API = process.env.REACT_APP_API_URL;
 
 const SubscriptionForm = () => {
 

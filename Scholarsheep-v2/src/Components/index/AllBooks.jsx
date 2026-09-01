@@ -1,10 +1,6 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import httpService from '../httpService';
-
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const alphabets = [
   'A',
@@ -54,16 +50,16 @@ const AllBooks = () => {
 
 
     const fetchBooks = async () =>{
-         const response = await httpService.get(`${API}/api/books`);
+         const response = await api.get('/api/books');
          setBookData(response.data.payload)
-    } 
+    }
     fetchBooks()
      // promise approach
     // axios.get(`${API}/api/books`)
     //   //  .then((response) => console.log(response.data))
     //   .then((response) => setBookData(response.data.payload))
     //   .catch((e) => console.log('catch', e));
-   
+
       // iifee approach
 
     // (async () => {

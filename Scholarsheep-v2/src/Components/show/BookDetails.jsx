@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-// import httpService from '../httpService';
+import api from '../../utils/axiosInstance';
 import { AiFillDelete } from 'react-icons/ai';
 import { BsPencilSquare } from 'react-icons/bs';
 import { BiArrowBack } from 'react-icons/bi';
-const API = process.env.REACT_APP_API_URL;
 
 const BookDetails = () => {
   const [book, setBook] = useState([]);
@@ -21,9 +19,7 @@ const BookDetails = () => {
   let { id } = useParams();
 
   useEffect(() => {
-    // httpService
-   
-    axios.get(`${API}/api/books/${id}`)
+    api.get(`/api/books/${id}`)
       .then((response) => {
         setBook(response.data.payload);
       })
@@ -36,8 +32,8 @@ const BookDetails = () => {
 
   //Delete functions
   const handleDelete = () => {
-    axios
-      .delete(`${API}/api/books/${id}`)
+    api
+      .delete(`/api/books/${id}`)
       .then(() => {
         navigate('/books');
       })

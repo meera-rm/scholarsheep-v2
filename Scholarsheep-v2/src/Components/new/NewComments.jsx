@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import httpService from '../httpService';
-// import httpService from '../httpService';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const NewComments = ({ student, log }) => {
   const navigate = useNavigate();
@@ -32,9 +28,8 @@ const NewComments = ({ student, log }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('inhandlesumbit', newComment);
-    // httpService
-    httpService
-      .post(`${API}/api/comments/new`, newComment)
+    api
+      .post('/api/comments/new', newComment)
       .then(() => {
         console.log('added');
         notify();

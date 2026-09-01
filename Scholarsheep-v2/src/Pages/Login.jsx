@@ -1,4 +1,4 @@
-import React, { useState, useActionState } from 'react';
+import React, { useState, useEffect, useActionState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import GoogleLoginButton from '../Components/auth/GoogleLoginButton';
@@ -15,18 +15,27 @@ const ROLES = [
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { loginWithCredentials, loginWithGoogle } = useAuth();
+  const { loginWithCredentials, loginWithGoogle, isAuthenticated, user } = useAuth();
   const [selectedRole, setSelectedRole] = useState('student');
   const from = location.state?.from?.pathname || '/';
 
   const navigateByRole = (role) => {
     switch (role) {
-      case 'admin': navigate('/teacher-dashboard'); break;
-      case 'teacher': navigate('/teacher-dashboard'); break;
-      case 'parent': navigate('/parent-dashboard'); break;
-      default: navigate(from !== '/' ? from : '/student-dashboard');
+      case 'admin': navigate('/teacher-dashboard', { replace: true }); break;
+      case 'teacher': navigate('/teacher-dashboard', { replace: true }); break;
+      case 'parent': navigate('/parent-dashboard', { replace: true }); break;
+      default: navigate(from !== '/' ? from : '/student-dashboard', { replace: true });
     }
   };
+
+  // Already logged in (stale tab, back button, redirect race) — don't show the form again.
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      navigateByRole(user.role);
+    }
+  }, [isAuthenticated, user]);
+
+  if (isAuthenticated) return null;
 
   // React 19: useActionState replaces useState + handleSubmit + isSubmitting + error
   const [loginState, loginAction, isLoggingIn] = useActionState(

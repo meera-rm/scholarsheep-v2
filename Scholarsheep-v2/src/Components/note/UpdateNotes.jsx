@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../utils/axiosInstance';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-const API = process.env.REACT_APP_API_URL;
 
 const UpdateNotes = () => {
   const { id } = useParams();
@@ -13,8 +11,8 @@ const UpdateNotes = () => {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`${API}/api/notes/${id}`)
+    api
+      .get(`/api/notes/${id}`)
       .then((res) => {
         const note = res.data.payload;
         setTitle(note.note_title || '');
@@ -31,7 +29,7 @@ const UpdateNotes = () => {
     }
     setSaving(true);
     try {
-      await axios.put(`${API}/api/notes/${id}`, {
+      await api.put(`/api/notes/${id}`, {
         note_title: title,
         textnotes: content.replace(/<[^>]*>/g, ''),
       });

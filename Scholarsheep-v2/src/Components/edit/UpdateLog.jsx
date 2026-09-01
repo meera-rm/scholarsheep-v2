@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../utils/axiosInstance';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-// import httpService from './httpService';
-
-const API = process.env.REACT_APP_API_URL;
 
 const UpdateLog = () => {
   let { id } = useParams();
@@ -22,8 +19,7 @@ const UpdateLog = () => {
   });
 
   useEffect(() => {
-    // httpService
-    axios.get(`${API}/api/logs/${id}`)
+    api.get(`/api/logs/${id}`)
       .then((res) => {
         setLog(res.data.payload);
       })
@@ -41,8 +37,7 @@ const UpdateLog = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // httpService
-    axios.put(`${API}/api/logs/${id}`, log)
+    api.put(`/api/logs/${id}`, log)
       .then(
         (res) => {
           navigate(`/logs/:${id}`);

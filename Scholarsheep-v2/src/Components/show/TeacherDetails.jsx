@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../utils/axiosInstance';
 import StudentDailyLogTracker from './StudentDailyLogTracker';
-
-const API = process.env.REACT_APP_API_URL;
 
 const TeacherDetails = () => {
   const [teacher, setTeacher] = useState({});
@@ -12,13 +10,13 @@ const TeacherDetails = () => {
   let { id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`${API}/api/teachers/${id}`)
+    api
+      .get(`/api/teachers/${id}`)
       .then((response) => setTeacher(response.data.payload))
       .catch(() => navigate('/not-found'));
 
-    axios
-      .get(`${API}/api/students`)
+    api
+      .get(`/api/students`)
       .then((response) => {
         const all = response.data.payload || [];
         setStudents(all.filter((s) => String(s.teachers_id) === String(id)));
@@ -28,8 +26,8 @@ const TeacherDetails = () => {
 
   const handleDelete = (studentId) => {
     if (!window.confirm('Remove this student?')) return;
-    axios
-      .delete(`${API}/api/students/${studentId}`)
+    api
+      .delete(`/api/students/${studentId}`)
       .then(() => setStudents(students.filter((s) => s.student_id !== studentId)))
       .catch((e) => console.error(e));
   };

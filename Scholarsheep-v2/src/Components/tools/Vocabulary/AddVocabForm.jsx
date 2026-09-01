@@ -1,19 +1,15 @@
 import { React, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import words from './../db/words.json';
 import DisplayCardList from './DisplayCardList';
 import PersonalDictionary from './temp/PersonalDictionary';
-import httpService from '../../httpService';
 import './AddVocabForm.scss';
 
 import { Link } from 'react-router-dom';
 
 const grades = ['K', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-
-const API = process.env.REACT_APP_API_URL;
 
 const AddVocabForm = (props) => {
   // console.log('in addvocabfprn', words);

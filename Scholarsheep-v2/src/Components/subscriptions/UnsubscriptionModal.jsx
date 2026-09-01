@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-
-const API = process.env.REACT_APP_API_URL;
 
 const UnsubscriptionModal = ({
   setShowModal,
@@ -53,7 +51,7 @@ const UnsubscriptionModal = ({
     
     try {
       // Send a request to your server to unsubscribe the user
-      const res =  axios.delete(`${API}/api/subscriptions/unsubscribe/${email}`);
+      const res =  api.delete(`/api/subscriptions/unsubscribe/${email}`);
       const resData = res.data;
       const resStatus = res.status;
 

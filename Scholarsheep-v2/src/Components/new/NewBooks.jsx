@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import {ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 // import httpService from '../httpService';
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const NewBooks = () => {
   const navigate = useNavigate();
@@ -39,7 +38,7 @@ const NewBooks = () => {
     console.log('inhandlesumbit', newBook);
 
     //  httpService
-    axios.post(`${API}/api/books/new`, newBook)
+    api.post('/api/books/new', newBook)
       .then(() => {
         console.log('added');
         notify();

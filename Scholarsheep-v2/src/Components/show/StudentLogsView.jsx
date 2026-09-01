@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import httpService from '../httpService';
+import api from '../../utils/axiosInstance';
 import Pagination from '../features/Pagination';
 import NewLogs from '../new/NewLogs';
 
@@ -14,8 +13,6 @@ import { MdDelete } from 'react-icons/md';
 import { MdTableView } from 'react-icons/md';
 import { MdAddComment } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
-
-const API = process.env.REACT_APP_API_URL;
 
 const StudentLogsView = (props) => {
 
@@ -32,8 +29,7 @@ const StudentLogsView = (props) => {
   let { id } = useParams();
 
   useEffect(() => {
-    // httpService
-    axios.get(`${API}/api/students/${id}`)
+    api.get(`/api/students/${id}`)
       .then((response) => {
         setStudentData(response.data);
         // console.log(response.data);
@@ -42,8 +38,7 @@ const StudentLogsView = (props) => {
   }, [id, navigate]);
 
   useEffect(() => {
-    // httpService
-    axios.get(`${API}/api/students/${id}/logs`)
+    api.get(`/api/students/${id}/logs`)
       .then((response) => {
         // console.log(response.data);
         setLogData(response.data);
@@ -52,8 +47,7 @@ const StudentLogsView = (props) => {
   }, [id, navigate]);
 
   useEffect(() => {
-    //  shttpService
-    axios.get(`${API}/api/books`).then((response) => {
+    api.get(`/api/books`).then((response) => {
       // console.log(response.data.payload);
       setBook(response.data.payload);
     });
@@ -61,8 +55,7 @@ const StudentLogsView = (props) => {
   }, [id, navigate]);
 
   useEffect(() => {
-    // httpService
-    axios.get(`${API}/api/comments`)
+    api.get(`/api/comments`)
       .then((response) => {
         setComments(response.data.payload);
       })
@@ -71,8 +64,7 @@ const StudentLogsView = (props) => {
 
   //Delete functions
   const handleDelete = () => {
-    // httpService
-    axios.delete(`${API}/api/students/${id}`)
+    api.delete(`/api/students/${id}`)
       .then(() => {
         navigate('/students');
       })

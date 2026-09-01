@@ -1,11 +1,8 @@
 import { React, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import httpService from '../../../httpService';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../../../utils/axiosInstance';
 
 const PersonalDictionary = ({ inputWord, words, setWords }) => {
   const [grade, setGrade] = useState('');
@@ -43,8 +40,8 @@ const PersonalDictionary = ({ inputWord, words, setWords }) => {
 
   const fetchWordMeaning = async () => {
     try {
-      const response = await axios.get(
-        `${API}/api/dictionary/lookup/${inputWord}`
+      const response = await api.get(
+        `/api/dictionary/lookup/${inputWord}`
       );
       console.log(response.data);
       const data = response.data;
@@ -88,25 +85,17 @@ const PersonalDictionary = ({ inputWord, words, setWords }) => {
       users_id: userId,
     };
 
-    // const response= await httpService.post('/api/dictionary', newWord);
     try {
-      const response = await httpService.post(
-        '/api/dictionary/addWordIfNotExists',
-        newWord
-      );
+      const response = await api.post('/api/dictionary', newWord);
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data.exists) {
-          setValidationResult('The word exists in the dictionary.');
-        } else {
-          setValidationResult('The word does not exist in the dictionary.');
-        }
+      if (response.data.success) {
+        setValidationResult('The word was added to the dictionary.');
       } else {
-        setValidationResult('Error while checking the word.');
+        setValidationResult('Error while adding the word.');
       }
     } catch (error) {
       console.error('Error:', error);
+      setValidationResult('Error while adding the word.');
     }
     // .then((response) => {
     //   // Handle success response

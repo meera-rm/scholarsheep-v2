@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const StudentDailyLogTracker = ({ students }) => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
@@ -31,7 +29,7 @@ const StudentDailyLogTracker = ({ students }) => {
 
       for (const student of students) {
         try {
-          const res = await axios.get(`${API}/api/students/${student.student_id}/logs`);
+          const res = await api.get(`/api/students/${student.student_id}/logs`);
           const logs = res.data.payload || [];
 
           // Group by date

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../utils/axiosInstance';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../context/AuthContext';
-
-const API = process.env.REACT_APP_API_URL;
 
 const NewNotes = () => {
   const navigate = useNavigate();
@@ -21,7 +19,7 @@ const NewNotes = () => {
     }
     setSaving(true);
     try {
-      await axios.post(`${API}/api/notes/new`, {
+      await api.post(`/api/notes/new`, {
         note_title: title || 'Untitled',
         textnotes: content,
         users_id: user?.id || 1,

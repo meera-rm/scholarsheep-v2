@@ -1,10 +1,9 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import BookCard from '../books/bookCard/BookCard';
 import './BookCardList.scss';
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const alphabets = [
   'A',
@@ -50,8 +49,8 @@ const BookCardList = () => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`${API}/api/books`)
+    api
+      .get('/api/books')
       //  .then((response) => console.log(response.data))
       .then((response) => {
         setBookData(response.data.payload);

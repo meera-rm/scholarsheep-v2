@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-// import httpService from '../httpService';
+import api from '../../utils/axiosInstance';
 // import  AllLogs from './AllLogs'
 import { AiFillDelete } from 'react-icons/ai';
 import { BsPencilSquare } from 'react-icons/bs';
 import { BiArrowBack } from 'react-icons/bi';
-
-const API = process.env.REACT_APP_API_URL;
 
 const LogDetails = () => {
   const [log, setLog] = useState([]);
@@ -17,8 +14,7 @@ const LogDetails = () => {
   let { id } = useParams();
 
   useEffect(() => {
-    // httpService
-    axios.get(`${API}/api/logs/${id}`)
+    api.get(`/api/logs/${id}`)
       .then((response) => {
         setLog(response.data);
       })
@@ -27,8 +23,7 @@ const LogDetails = () => {
 
   //Delete functions
   const handleDelete = () => {
-    // httpService
-    axios.delete(`${API}/api/logs/${id}`)
+    api.delete(`/api/logs/${id}`)
       .then(() => {
         navigate('/logs');
       })

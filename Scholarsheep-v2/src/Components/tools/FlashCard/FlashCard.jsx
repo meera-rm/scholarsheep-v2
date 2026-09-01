@@ -1,11 +1,8 @@
 import { React, useState, useEffect } from 'react';
-import axios from 'axios';
 import words from '../db/words.json';
 import './FlashCard.scss';
 import FlashCardList from './FlashCardList';
-// import httpService from '../../httpService';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../../utils/axiosInstance';
 
 const options = [
   'AllGrades',
@@ -23,8 +20,7 @@ const FlashCard = () => {
   const [selectedGrade, setSelectedGrade] = useState('AllGrades');
 
   useEffect(() => {
-    //httpService. 
-      axios.get(`${API}/api/dictionary`)
+      api.get('/api/dictionary')
       // .then((response) => console.log(response.data))
       .then((response) => setWordData(response.data.payload))
       .catch((e) => console.log('catch', e));

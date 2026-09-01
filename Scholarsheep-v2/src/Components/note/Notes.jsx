@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../utils/axiosInstance';
 import DOMPurify from 'dompurify';
-
-const API = process.env.REACT_APP_API_URL;
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    axios.get(`${API}/api/notes`)
+    api.get(`/api/notes`)
       .then((response) => setNotes(response.data.payload || []))
       .catch((e) => console.log('catch', e));
   }, []);

@@ -1,11 +1,8 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import EmptyView from '../../emptyView/EmptyView';
 import BookLoader from '../../loader/BookLoader';
 import BookCard from '../bookCard/BookCard';
-// import httpService from '../../httpService';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../../utils/axiosInstance';
 
 const alphabets = [
   'All',
@@ -52,7 +49,7 @@ const SearchAndFilter = ({reading}) => {
 
   useEffect(() => {
     // httpService
-    axios.get(`${API}/api/books`)
+    api.get('/api/books')
       //  .then((response) => console.log(response.data))
       .then((response) => {
         setBookData(response.data.payload);

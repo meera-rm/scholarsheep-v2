@@ -3,8 +3,7 @@ import SearchBar from "./SearchBar";
 import EmptyView from "../../emptyView/EmptyView";
 import BookCard from './BookCard';
 import './BooksList.scss';
-import axios from 'axios';
-const API = process.env.REACT_APP_API_URL;
+import api from '../../../utils/axiosInstance';
 
 const BooksList = () => {
     const [book, setBook] = useState([]);
@@ -15,7 +14,7 @@ const BooksList = () => {
     // fetch all student data
     useEffect(() => {
         // httpService
-        axios.get(`${API}/api/books`)
+        api.get('/api/books')
         //    .then((response) => console.log(response.data.payload))
           .then((response) => {
             setBook(response.data.payload);

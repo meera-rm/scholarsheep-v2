@@ -4,9 +4,7 @@ import './AddVocab.scss';
 import AddVocabForm from './AddVocabForm';
 import DisplayCardList from './DisplayCardList';
 import { toast } from 'react-toastify';
-import axios from 'axios';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../../../utils/axiosInstance';
 
 const AddVocab = () => {
   const [showCards, setShowCards] = useState(false);
@@ -14,7 +12,7 @@ const AddVocab = () => {
 
   const fetchAllWords = async () => {
     try {
-      const response = await axios.get(`${API}/api/dictionary/`);
+      const response = await api.get('/api/dictionary/');
       setPersonalDict(response.data.payload || []);
     } catch (error) {
       console.log('Error fetching dictionary:', error);
@@ -37,8 +35,8 @@ const AddVocab = () => {
 
     try {
       // 1. Fetch word meaning via backend proxy (avoids CORS on the free dictionary API)
-      const dictResponse = await axios.get(
-        `${API}/api/dictionary/lookup/${inputWord.trim()}`
+      const dictResponse = await api.get(
+        `/api/dictionary/lookup/${inputWord.trim()}`
       );
       const data = dictResponse.data;
 
@@ -81,7 +79,7 @@ const AddVocab = () => {
         users_id: 1,
       };
 
-      await axios.post(`${API}/api/dictionary`, userWord);
+      await api.post('/api/dictionary', userWord);
       toast.success(`"${inputWord}" added to your vocabulary!`);
 
       // 4. Refresh the word list so the new word shows immediately

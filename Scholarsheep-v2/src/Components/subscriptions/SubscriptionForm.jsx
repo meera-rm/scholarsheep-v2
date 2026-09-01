@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import './SubscriptionForm.scss';
 import logoImage from '../../Components/asset/sheeplogo.png';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +7,6 @@ import UnsubscriptionModal from './UnsubscriptionModal';
 import AddSubscription from './AddSubscription';
 import EditEmailModal from './EditEmailModal';
 import { ToastContainer, toast } from 'react-toastify';
-const API = process.env.REACT_APP_API_URL;
 
 const SubscriptionForm = () => {
   const navigate = useNavigate();

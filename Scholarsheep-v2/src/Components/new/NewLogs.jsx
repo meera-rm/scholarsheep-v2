@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import httpService from '../httpService';
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const NewLogs = (props) => {
   const navigate = useNavigate();
@@ -34,8 +32,8 @@ const NewLogs = (props) => {
     event.preventDefault();
     console.log('inhandlesumbit', newLog);
     //  httpService
-    httpService
-      .post(`${API}/api/logs/new`, newLog)
+    api
+      .post('/api/logs/new', newLog)
       .then(() => {
         console.log('added');
         notify();

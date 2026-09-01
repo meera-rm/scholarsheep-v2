@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../utils/axiosInstance';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-
-const API = process.env.REACT_APP_API_URL;
 
 const EditSubscriptions = ({
   editing,
@@ -91,10 +89,10 @@ const EditSubscriptions = ({
     }
     const updatedSubscription = {
       email: currentEmail,
-      fullname: currentName,
+      fullName: currentName,
       is_subscribed:true,
       is_verified: isverified,
-     
+
 
     };
 
@@ -114,13 +112,13 @@ const EditSubscriptions = ({
     }
 
     try {
-      const res = await axios.put(
-        `${API}/api/subscriptions/update/:${id}`,
+      const res = await api.put(
+        `/api/subscriptions/update/${email}`,
         updatedSubscription
       );
       let data = res.data.payload
       console.log('updatedData=', data);
-      if (res.status === 'success') {
+      if (res.data.success) {
         notify('success');
       }
     } catch (err) {

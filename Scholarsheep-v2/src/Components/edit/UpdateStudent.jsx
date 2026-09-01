@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../utils/axiosInstance';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-// import httpService from '../httpService';
-
-const API = process.env.REACT_APP_API_URL;
 
 const UpdateStudent = () => {
   let { id } = useParams();
@@ -23,8 +20,7 @@ const UpdateStudent = () => {
   });
 
   useEffect(() => {
-    // httpService
-    axios.get(`${API}/api/students/${id}`)
+    api.get(`/api/students/${id}`)
       .then((res) => {
         setStudent(res.data);
       })
@@ -42,8 +38,7 @@ const UpdateStudent = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // httpService
-    axios.put(`${API}/api/students/${id}`, student)
+    api.put(`/api/students/${id}`, student)
       .then(
         (res) => {
           navigate(`/students${id}`);

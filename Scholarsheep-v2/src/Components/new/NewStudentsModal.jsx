@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import {ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 // import httpService from '../httpService';
-const API = process.env.REACT_APP_API_URL;
+import api from '../../utils/axiosInstance';
 
 const NewStudentsModal = (props) => {
   const navigate = useNavigate();
@@ -37,7 +36,7 @@ const NewStudentsModal = (props) => {
     event.preventDefault();
     console.log('inhandlesumbit', student);
     //  httpService
-    axios.post(`${API}/api/students/new`, student)
+    api.post('/api/students/new', student)
       .then(() => {
         console.log('added');
         notify()
