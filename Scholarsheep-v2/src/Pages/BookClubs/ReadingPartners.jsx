@@ -57,13 +57,13 @@ const ReadingPartners = () => {
     }
   }, [user, isTeacher]);
 
-  const handleCreatePair = (e) => {
+  const handleCreatePair = async (e) => {
     e.preventDefault();
     if (!pairForm.student1.trim() || !pairForm.student2.trim()) {
       toast.error('Enter both student names');
       return;
     }
-    createPartnership({
+    await createPartnership({
       student1: pairForm.student1.trim(),
       student2: pairForm.student2.trim(),
       bookTitle: pairForm.bookTitle.trim(),
@@ -74,8 +74,8 @@ const ReadingPartners = () => {
     refreshPartners();
   };
 
-  const handleInvitePartner = () => {
-    const pair = createPartnership({
+  const handleInvitePartner = async () => {
+    const pair = await createPartnership({
       student1: user?.username || 'student',
       bookTitle: myBookTitle,
       assignedBy: 'student',
@@ -85,10 +85,10 @@ const ReadingPartners = () => {
     refreshPartners();
   };
 
-  const handleAcceptInvite = (e) => {
+  const handleAcceptInvite = async (e) => {
     e.preventDefault();
     if (!inviteCode.trim()) return;
-    const result = acceptPartnerInvite(inviteCode.trim().toUpperCase(), user?.username || 'student');
+    const result = await acceptPartnerInvite(inviteCode.trim().toUpperCase(), user?.username || 'student');
     if (result.error) {
       toast.error(result.error);
     } else {

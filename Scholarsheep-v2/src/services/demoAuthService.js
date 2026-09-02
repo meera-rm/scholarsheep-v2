@@ -83,11 +83,16 @@ const DEMO_ACCOUNT_IDS = new Set(['demo-admin-001', 'demo-teacher-001', 'demo-st
 /**
  * isDemoMode — determines if data should come from localStorage or the API.
  *
- * Returns true (use localStorage) when:
- *   1. The user toggled demo mode ON, OR
- *   2. The current user is a demo account (always uses localStorage regardless of toggle)
+ * Returns true (use localStorage) only when:
+ *   1. The current user is one of the 4 known demo accounts (always uses
+ *      localStorage regardless of any toggle), OR
+ *   2. The user explicitly toggled demo mode ON via setDemoMode()/toggleDemoMode()
  *
- * This ensures demo accounts can never touch real production data.
+ * Everyone else — including brand-new real signups — defaults to the real
+ * backend. This ensures demo accounts can never touch real production data,
+ * without accidentally treating every real account as a demo account too
+ * (the previous default here was `true`, which silently made registration,
+ * login, and every isDemoMode()-gated feature fake/local for real users).
  */
 export function isDemoMode() {
   // Demo accounts ALWAYS use localStorage — they can never hit the real API
@@ -99,10 +104,14 @@ export function isDemoMode() {
     } catch { /* ignore */ }
   }
 
-  // For real users, check the toggle
+  // For real users, check the toggle (there is currently no UI that sets
+  // this — setDemoMode()/toggleDemoMode() are unused — so this only ever
+  // matters if something sets it programmatically in the future).
   const stored = localStorage.getItem(DEMO_MODE_KEY);
   if (stored !== null) return stored === 'true';
-  return true; // default: demo mode ON
+  return false; // default: real backend. A real account's token never
+  // matches DEMO_ACCOUNT_IDS above, so this default only affects accounts
+  // that aren't one of the 4 known demo logins.
 }
 
 export function isDemoAccount() {

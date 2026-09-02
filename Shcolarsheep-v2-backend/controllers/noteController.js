@@ -1,6 +1,9 @@
 const express = require('express');
 const notes = express.Router();
 const { getAllNotes, getANote, createNote, updateNote, deleteNote } = require('../queries/notes');
+const { authenticate } = require('../middleware/authenticate');
+
+notes.use(authenticate);
 
 notes.get('/', async (req, res) => {
   try {

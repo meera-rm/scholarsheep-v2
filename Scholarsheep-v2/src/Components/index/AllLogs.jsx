@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 // import Table from 'react-bootstrap/Table';
 import Student from './Student.jsx';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const AllLogs = () => {
   const [logData, setLogData] = useState([]);
@@ -28,6 +29,10 @@ const AllLogs = () => {
   // }, [logData]);
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setStudentData([]);
+      return;
+    }
     //  httpService
     api.get('/api/students')
       // console.log(response.data.payload))

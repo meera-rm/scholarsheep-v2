@@ -4,6 +4,7 @@ import { addBook } from '../../../services/readingLogService';
 import { useAuth } from '../../../context/AuthContext';
 import { toast } from 'react-toastify';
 import api from '../../../utils/axiosInstance';
+import { isDemoMode } from '../../../services/demoAuthService';
 
 const READING_LEVELS = [
   'A','B','C','D','E','F','G','H','I','J','K','L','M',
@@ -40,6 +41,10 @@ const ApiBookSearch = () => {
   const handleAddToLibrary = async (book) => {
     if (!addForm.reading_level) {
       toast.error('Please select a reading level');
+      return;
+    }
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.');
       return;
     }
     setSaving(true);

@@ -1,6 +1,10 @@
 const express = require('express');
 const students = express.Router({ mergeParams: true });
 const { getAllStudents, getAStudent, createStudent, updateStudent, deleteStudent } = require('../queries/students');
+const { authenticate, authorize } = require('../middleware/authenticate');
+
+students.use(authenticate);
+students.use(authorize('teacher', 'admin'));
 
 students.get('/', async (req, res) => {
   try {

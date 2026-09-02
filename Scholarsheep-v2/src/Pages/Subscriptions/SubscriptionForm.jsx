@@ -163,7 +163,7 @@ const SubscriptionForm = () => {
                 editing={editing}
                 setEditing={setEditing}
                 error={error}
-                status={null}
+                status={status}
                 setError={setError}
                 setStatus={setStatus}
               />

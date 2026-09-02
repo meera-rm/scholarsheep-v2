@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ColorPanel.css';
 
-const BrushSize=({brushWidth,setBrushWidth})=>{
+const BrushSize=({brushWidth,setBrushWidth,setSelectedTool})=>{
     
     return( 
         <div className="input-wrapper">
@@ -14,7 +14,7 @@ const BrushSize=({brushWidth,setBrushWidth})=>{
         onChange={(e) => setBrushWidth(parseInt(e.target.value))}
       />
       
-      <button className="clear-button" onClick={() => console.log('Clear')}>
+      <button className="clear-button" onClick={() => setSelectedTool(`clear-${Date.now()}`)}>
        Clear
       </button>
       <button className="save-button" onClick={() => console.log('Save')}>

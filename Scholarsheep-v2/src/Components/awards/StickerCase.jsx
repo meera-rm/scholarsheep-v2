@@ -31,7 +31,7 @@ const StickerCase = ({ awards }) => {
       <div className="w-full bg-gray-200 rounded-full h-3 mb-8">
         <div
           className="bg-gradient-to-r from-teal-400 to-teal-600 h-3 rounded-full transition-all duration-500"
-          style={{ width: `${(earnedCount / awards.length) * 100}%` }}
+          style={{ width: `${awards.length ? (earnedCount / awards.length) * 100 : 0}%` }}
         ></div>
       </div>
 

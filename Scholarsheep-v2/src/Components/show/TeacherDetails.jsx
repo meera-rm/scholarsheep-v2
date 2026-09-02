@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 import StudentDailyLogTracker from './StudentDailyLogTracker';
 
 const TeacherDetails = () => {
@@ -10,6 +11,12 @@ const TeacherDetails = () => {
   let { id } = useParams();
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setTeacher({});
+      setStudents([]);
+      return;
+    }
+
     api
       .get(`/api/teachers/${id}`)
       .then((response) => setTeacher(response.data.payload))
@@ -26,6 +33,10 @@ const TeacherDetails = () => {
 
   const handleDelete = (studentId) => {
     if (!window.confirm('Remove this student?')) return;
+    if (isDemoMode()) {
+      alert('This feature is not available in demo mode.');
+      return;
+    }
     api
       .delete(`/api/students/${studentId}`)
       .then(() => setStudents(students.filter((s) => s.student_id !== studentId)))

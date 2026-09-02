@@ -37,7 +37,10 @@ const StudentNew = lazy(() => import('../../Pages/Student/StudentNew'));
 const StudentShow = lazy(() => import('../../Pages/Student/StudentShow'));
 const StudentEdit = lazy(() => import('../../Pages/Student/StudentEdit'));
 
-const AddSubscription = lazy(() => import('../subscriptions/AddSubscription'));
+const MyStudents = lazy(() => import('../../Pages/MyStudents/MyStudents'));
+const StudentSessions = lazy(() => import('../../Pages/MyStudents/StudentSessions'));
+
+const AddSubscription = lazy(() => import('../../Pages/Subscriptions/SubscriptionForm'));
 const ListSubscription = lazy(() => import('../subscriptions/ListSubscription'));
 const EditEmailModal = lazy(() => import('../subscriptions/EditEmailModal'));
 
@@ -165,6 +168,11 @@ const AnimatedRoutes = () => {
               <Route path='new' element={<ProtectedRoute allowedRoles={['teacher']}><StudentNew /></ProtectedRoute>} />
               <Route path=':id' element={<ProtectedRoute allowedRoles={['teacher']}><StudentShow /></ProtectedRoute>} />
               <Route path=':id/edit' element={<ProtectedRoute allowedRoles={['teacher']}><StudentEdit /></ProtectedRoute>} />
+            </Route>
+
+            <Route path='/my-students'>
+              <Route index element={<ProtectedRoute allowedRoles={['teacher']}><MyStudents /></ProtectedRoute>} />
+              <Route path=':studentId' element={<ProtectedRoute allowedRoles={['teacher']}><StudentSessions /></ProtectedRoute>} />
             </Route>
 
             <Route path='/teacher-dashboard' element={

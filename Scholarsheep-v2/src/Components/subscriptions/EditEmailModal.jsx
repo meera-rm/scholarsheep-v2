@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
  import EditSubscription from './EditSubscription';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const EditEmailModal = ({
   editing,
@@ -55,25 +56,57 @@ const EditEmailModal = ({
     }, 2000);
   };
 
-  const handleEmailCheckChange = () => {
-    setEmailUpdated(true);
+  const handleEmailCheckChange = async (targetEmail = email) => {
+    if (isDemoMode()) {
+      setEmailUpdated(true);
+      return;
+    }
+    if (!targetEmail) return;
 
-    const response = api.get(`/api/subscriptions/subscribe/${email}`);
-    console.log(response.data)
-
-  .then((response) => {
-    // Handle successful response
-    console.log('Response Data:', response.data);
-    // Perform further operations with the response data if needed
-  })
-  .catch((error) => {
-    // Handle error
-    console.error('Error:', error);
-  });
+    try {
+      const response = await api.get(`/api/subscriptions/subscribe/${targetEmail}`);
+      const subscription = response.data.payload;
+      if (subscription) {
+        setId(subscription.id);
+        setName(subscription.firstname);
+        setEmail(subscription.email);
+        setEmailUpdated(true);
+      } else {
+        setError('Subscription not found');
+      }
+    } catch (error) {
+      setError('Subscription not found');
+    }
   };
+
+  // Reached directly via /subscriptions/:id/edit, where :id is the target
+  // email (see ListSubscription.jsx's link) — auto-load it instead of
+  // requiring the "enter email to find" step, which needs the `edit` prop
+  // that this standalone route never supplies.
+  const { id: emailFromUrl } = useParams();
+  useEffect(() => {
+    if (emailFromUrl) {
+      setEmail(emailFromUrl);
+      handleEmailCheckChange(emailFromUrl);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [emailFromUrl]);
 
   const handleEmailCheck = async () => {
     console.log(currentEmail);
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+      return;
+    }
     try {
       // Send a request to your server to unsubscribe the user
       const res = await api.get('/api/subscriptions');

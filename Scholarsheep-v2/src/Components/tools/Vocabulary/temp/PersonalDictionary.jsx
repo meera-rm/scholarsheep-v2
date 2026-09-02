@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../../../utils/axiosInstance';
+import { isDemoMode } from '../../../../services/demoAuthService';
 
 const PersonalDictionary = ({ inputWord, words, setWords }) => {
   const [grade, setGrade] = useState('');
@@ -84,6 +85,11 @@ const PersonalDictionary = ({ inputWord, words, setWords }) => {
       antonyms: antonyms,
       users_id: userId,
     };
+
+    if (isDemoMode()) {
+      setValidationResult('This feature is not available in demo mode.');
+      return;
+    }
 
     try {
       const response = await api.post('/api/dictionary', newWord);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { GiTeacher } from 'react-icons/gi';
-import { FaChild, FaBook, FaComments, FaClipboardList } from 'react-icons/fa';
+import { FaChild, FaBook, FaClipboardList } from 'react-icons/fa';
 import { MdSubscriptions } from 'react-icons/md';
 import TeacherActivityFeed from '../Components/notifications/TeacherActivityFeed';
 import { getUnreadCount } from '../services/notificationService';
@@ -29,8 +29,8 @@ const TeacherDashboard = () => {
 
   const cards = [
     { title: 'Students', desc: isAdmin ? 'Manage all students' : 'View your students', icon: <FaChild size={32} />, link: '/students', color: 'bg-blue-500' },
+    { title: 'My Students', desc: 'Reading sessions & comments', icon: <FaClipboardList size={32} />, link: '/my-students', color: 'bg-indigo-500' },
     { title: 'Books', desc: 'Manage reading materials', icon: <FaBook size={32} />, link: '/books', color: 'bg-green-500' },
-    { title: 'Comments', desc: 'View and add comments', icon: <FaComments size={32} />, link: '/comments', color: 'bg-purple-500' },
     { title: 'Notes', desc: 'Teaching notes', icon: <FaClipboardList size={32} />, link: '/notes', color: 'bg-orange-500' },
     ...(isAdmin ? [{ title: 'Teachers', desc: 'Manage all teachers', icon: <GiTeacher size={32} />, link: '/teachers', color: 'bg-teal-500' }] : []),
     { title: 'Subscriptions', desc: 'Manage subscriptions', icon: <MdSubscriptions size={32} />, link: '/subscriptions', color: 'bg-pink-500' },

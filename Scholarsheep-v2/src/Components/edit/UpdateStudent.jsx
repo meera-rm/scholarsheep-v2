@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 const UpdateStudent = () => {
@@ -20,13 +21,27 @@ const UpdateStudent = () => {
   });
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setStudent({
+        student_id: '',
+        student_name: '',
+        parent_name: '',
+        parent_email: '',
+        student_email: '',
+        grade: '',
+        academic_year: '',
+        reading_level: '',
+        teachers_id: id,
+      });
+      return;
+    }
     api.get(`/api/students/${id}`)
       .then((res) => {
-        setStudent(res.data);
+        setStudent(res.data.payload);
       })
       .catch((e) => console.error(e));
-    console.log('data=', student);
-  }, [id, student]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   const onInputChange = (event) => {
     console.log(event.target.value);
@@ -38,10 +53,14 @@ const UpdateStudent = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (isDemoMode()) {
+      alert('This feature is not available in demo mode.');
+      return;
+    }
     api.put(`/api/students/${id}`, student)
       .then(
         (res) => {
-          navigate(`/students${id}`);
+          navigate(`/students/${id}`);
         },
         (error) => console.error(error)
       )

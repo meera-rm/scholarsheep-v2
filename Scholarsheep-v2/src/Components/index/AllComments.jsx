@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 // import Table from 'react-bootstrap/Table';
 
 const AllLogs = () => {
@@ -9,6 +10,10 @@ const AllLogs = () => {
   let { logId } = useParams();
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setComments([]);
+      return;
+    }
     api.get('/api/comments')
       .then((response) => setComments(response.data))
       .catch((e) => console.error('catch', e));

@@ -14,17 +14,22 @@ const BookClubDetail = () => {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const c = getClubById(id);
-    if (!c) { navigate('/book-clubs'); return; }
-    setClub(c);
-    setPosts(getClubPosts(id));
+    let cancelled = false;
+    (async () => {
+      const c = await getClubById(id);
+      if (cancelled) return;
+      if (!c) { navigate('/book-clubs'); return; }
+      setClub(c);
+      setPosts(await getClubPosts(id));
+    })();
+    return () => { cancelled = true; };
   }, [id, navigate]);
 
-  const handlePost = (e) => {
+  const handlePost = async (e) => {
     e.preventDefault();
     if (!newPost.trim()) return;
-    addPost({ clubId: id, username: user?.username || 'student', content: newPost.trim() });
-    setPosts(getClubPosts(id));
+    await addPost({ clubId: id, username: user?.username || 'student', content: newPost.trim() });
+    setPosts(await getClubPosts(id));
     setNewPost('');
   };
 
@@ -34,9 +39,9 @@ const BookClubDetail = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleLeave = () => {
+  const handleLeave = async () => {
     if (!window.confirm('Leave this book club?')) return;
-    leaveClub(id, user?.username);
+    await leaveClub(id, user?.username);
     toast.info('Left the club');
     navigate('/book-clubs');
   };

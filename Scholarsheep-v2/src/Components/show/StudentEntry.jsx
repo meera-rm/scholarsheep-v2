@@ -1,6 +1,7 @@
 import React ,{useState} from 'react';
 import { Link ,useNavigate  } from 'react-router-dom';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 import { MdDelete } from 'react-icons/md';
 import { MdTableView } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
@@ -30,7 +31,11 @@ const StudentEntry=({student})=>{
 
   //Delete functions
   const handleDelete = (studentId) => {
-   
+    if (isDemoMode()) {
+      alert('This feature is not available in demo mode.');
+      return;
+    }
+
     api.delete(`/api/students/${studentId}`)
       .then(() => {
         navigate('/students');

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 import Pagination from '../features/Pagination';
 import NewLogs from '../new/NewLogs';
 
@@ -29,6 +30,10 @@ const StudentLogsView = (props) => {
   let { id } = useParams();
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setStudentData([]);
+      return;
+    }
     api.get(`/api/students/${id}`)
       .then((response) => {
         setStudentData(response.data);
@@ -38,6 +43,10 @@ const StudentLogsView = (props) => {
   }, [id, navigate]);
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setLogData([]);
+      return;
+    }
     api.get(`/api/students/${id}/logs`)
       .then((response) => {
         // console.log(response.data);
@@ -55,6 +64,10 @@ const StudentLogsView = (props) => {
   }, [id, navigate]);
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setComments([]);
+      return;
+    }
     api.get(`/api/comments`)
       .then((response) => {
         setComments(response.data.payload);
@@ -64,6 +77,10 @@ const StudentLogsView = (props) => {
 
   //Delete functions
   const handleDelete = () => {
+    if (isDemoMode()) {
+      alert('This feature is not available in demo mode.');
+      return;
+    }
     api.delete(`/api/students/${id}`)
       .then(() => {
         navigate('/students');

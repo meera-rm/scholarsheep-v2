@@ -25,7 +25,14 @@ const Tools = ({ selectedTool, onToolChange }) => {
   // const [tools,Selectedtools] = useState('pencil');
 
   const handleToolSelection = (selectedTool) => {
-    onToolChange(selectedTool); // Update the tool state in the parent component (PaintApp)
+    onToolChange(selectedTool.toLowerCase()); // Update the tool state in the parent component (PaintApp)
+  };
+
+  // One-shot actions need a unique value on every click (not just every
+  // change) so repeated clicks re-trigger DrawCanvas's effect — see
+  // DrawCanvas.jsx's selectedTool.startsWith('undo'/'redo') handling.
+  const handleOneShotAction = (action) => {
+    onToolChange(`${action.toLowerCase()}-${Date.now()}`);
   };
 
   const togglePencilDropdown = () => {
@@ -37,13 +44,13 @@ const Tools = ({ selectedTool, onToolChange }) => {
   };
 
   const handlePencilOptionClick = (option) => {
-    console.log(option);
-
     handleToolSelection(option);
+    setShowPencilDropdown(false);
   };
 
   const handleShapesOptionClick = (option) => {
     handleToolSelection(option);
+    setShowShapesDropdown(false);
   };
 
   return (
@@ -140,7 +147,16 @@ const Tools = ({ selectedTool, onToolChange }) => {
       <div style={{ display: 'block', textAlign: 'center' }}>
         <button
           className='single-button'
-          onClick={() => handleToolSelection('Undo')}
+          onClick={() => handleToolSelection('Eraser')}
+        >
+          <CiEraser />
+        </button>
+        <p>Eraser</p>
+      </div>
+      <div style={{ display: 'block', textAlign: 'center' }}>
+        <button
+          className='single-button'
+          onClick={() => handleOneShotAction('Undo')}
         >
           <IoIosUndo />
         </button>
@@ -149,7 +165,7 @@ const Tools = ({ selectedTool, onToolChange }) => {
       <div style={{ display: 'block', textAlign: 'center' }}>
         <button
           className='single-button'
-          onClick={() => handleToolSelection('Redo')}
+          onClick={() => handleOneShotAction('Redo')}
         >
           <IoIosRedo />
         </button>

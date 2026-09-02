@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 const UpdateComments = () => {
@@ -17,13 +18,16 @@ const UpdateComments = () => {
   });
 
   useEffect(() => {
+    if (isDemoMode()) {
+      return;
+    }
     api.get(`/api/comments/${id}`)
       .then((res) => {
         setComment(res.data.payload);
       })
       .catch((e) => console.error(e));
-    console.log('data=', comment);
-  }, [id, comment]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   const onInputChange = (event) => {
     console.comment(event.target.value);
@@ -35,6 +39,10 @@ const UpdateComments = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (isDemoMode()) {
+      alert('This feature is not available in demo mode.');
+      return;
+    }
     api.put(`/api/comments/${id}`, comment)
       .then(
         (res) => {

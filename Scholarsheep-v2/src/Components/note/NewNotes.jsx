@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import api from '../../utils/axiosInstance';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../context/AuthContext';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const NewNotes = () => {
   const navigate = useNavigate();
@@ -15,6 +16,10 @@ const NewNotes = () => {
     e.preventDefault();
     if (!content.trim()) {
       toast.error('Note content cannot be empty');
+      return;
+    }
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.');
       return;
     }
     setSaving(true);

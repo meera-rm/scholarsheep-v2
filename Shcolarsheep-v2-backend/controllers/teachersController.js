@@ -1,8 +1,11 @@
 const express = require('express');
 const teachers = express.Router();
 const { allTeachers, oneTeacher, createTeacher, updateTeacher, deleteTeacher } = require('../queries/teachers');
+const { authenticate, authorize } = require('../middleware/authenticate');
 
-teachers.get('/', async (req, res) => {
+teachers.use(authenticate);
+
+teachers.get('/', authorize('admin'), async (req, res) => {
   try {
     const data = await allTeachers();
     res.status(200).json({ success: true, payload: data });
@@ -11,7 +14,7 @@ teachers.get('/', async (req, res) => {
   }
 });
 
-teachers.get('/:id', async (req, res) => {
+teachers.get('/:id', authorize('teacher', 'admin'), async (req, res) => {
   try {
     const data = await oneTeacher(req.params.id);
     res.status(200).json({ success: true, payload: data });
@@ -20,7 +23,7 @@ teachers.get('/:id', async (req, res) => {
   }
 });
 
-teachers.post('/new', async (req, res) => {
+teachers.post('/new', authorize('admin'), async (req, res) => {
   try {
     const data = await createTeacher(req.body);
     res.status(200).json({ success: true, payload: data });
@@ -29,7 +32,7 @@ teachers.post('/new', async (req, res) => {
   }
 });
 
-teachers.put('/:teacherId', async (req, res) => {
+teachers.put('/:teacherId', authorize('admin'), async (req, res) => {
   try {
     const data = await updateTeacher(req.body, req.params.teacherId);
     res.status(200).json({ success: true, payload: data });
@@ -38,7 +41,7 @@ teachers.put('/:teacherId', async (req, res) => {
   }
 });
 
-teachers.delete('/:id', async (req, res) => {
+teachers.delete('/:id', authorize('admin'), async (req, res) => {
   try {
     const data = await deleteTeacher(req.params.id);
     res.status(200).json({ success: true, payload: data });

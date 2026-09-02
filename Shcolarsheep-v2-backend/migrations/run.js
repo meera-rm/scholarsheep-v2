@@ -6,6 +6,8 @@ const MIGRATION_FILES = [
   '001_initial_schema.sql',
   '002_legacy_tables.sql',
   '003_new_features.sql',
+  '004_session_comments.sql',
+  '005_seed_books_catalog.sql'
 ];
 
 async function runMigrations() {

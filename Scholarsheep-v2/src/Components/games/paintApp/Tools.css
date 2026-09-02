@@ -36,11 +36,12 @@
     border-radius: 5px;
     padding: 10px;
     z-index: 1;
-    opacity: 0; /* Initially hide the dropdown */
-    pointer-events: none; /* Disable pointer events */
-    transition: opacity 0.2s ease-in-out; /* Add a slight delay */
+    /* Visibility is controlled by React (conditional render) — no CSS
+       hover-gating here, since a mouse path through the gap above this
+       panel would otherwise drop pointer-events right as the user
+       clicks a shape/tool option. */
   }
-  
+
   .dropdown-content button {
     background-color: transparent;
     color: #333;
@@ -51,14 +52,9 @@
     transition: background-color 0.3s ease;
     font-size: 20px;
   }
-  
+
   .dropdown-content button:hover {
     background-color: rgb(49, 173, 159);
-  }
-  
-  .dropdown:hover .dropdown-content {
-    opacity: 1; /* Show the dropdown */
-    pointer-events: auto; /* Enable pointer events */
   }
   
   /* Optional: Styling for active/hover states */

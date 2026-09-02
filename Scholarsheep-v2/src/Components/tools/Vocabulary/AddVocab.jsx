@@ -5,6 +5,7 @@ import AddVocabForm from './AddVocabForm';
 import DisplayCardList from './DisplayCardList';
 import { toast } from 'react-toastify';
 import api from '../../../utils/axiosInstance';
+import { isDemoMode } from '../../../services/demoAuthService';
 
 const AddVocab = () => {
   const [showCards, setShowCards] = useState(false);
@@ -78,6 +79,11 @@ const AddVocab = () => {
         antonyms: antonymArr.slice(0, 5),
         users_id: 1,
       };
+
+      if (isDemoMode()) {
+        toast.info('This feature is not available in demo mode.');
+        return;
+      }
 
       await api.post('/api/dictionary', userWord);
       toast.success(`"${inputWord}" added to your vocabulary!`);

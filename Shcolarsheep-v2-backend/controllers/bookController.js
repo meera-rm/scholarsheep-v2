@@ -1,6 +1,7 @@
 const express = require('express');
 const books = express.Router();
 const { getAllBooks, getABook, createBook, updateBook, deleteBook } = require('../queries/books');
+const { authenticate } = require('../middleware/authenticate');
 
 const checkPicture = (req, res, next) => {
   if (!req.body.book_picture) {
@@ -31,7 +32,7 @@ books.get('/:bookId', async (req, res) => {
 });
 
 // POST /api/books/new
-books.post('/new', checkPicture, async (req, res) => {
+books.post('/new', authenticate, checkPicture, async (req, res) => {
   try {
     const addBook = await createBook(req.body);
     res.status(200).json({ success: true, payload: addBook[0] });
@@ -41,7 +42,7 @@ books.post('/new', checkPicture, async (req, res) => {
 });
 
 // PUT /api/books/:bookId
-books.put('/:bookId', async (req, res) => {
+books.put('/:bookId', authenticate, async (req, res) => {
   try {
     const updatedBook = await updateBook(req.body, req.params.bookId);
     res.status(200).json({ success: true, payload: updatedBook });
@@ -51,7 +52,7 @@ books.put('/:bookId', async (req, res) => {
 });
 
 // DELETE /api/books/:bookId
-books.delete('/:bookId', async (req, res) => {
+books.delete('/:bookId', authenticate, async (req, res) => {
   try {
     const deletedBook = await deleteBook(req.params.bookId);
     res.status(200).json({ success: true, payload: deletedBook });

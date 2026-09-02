@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const dictionary = express.Router();
 const { allWords, getAWord, createWord, updateWord, deleteWord } = require('../queries/dictionary');
+const { authenticate } = require('../middleware/authenticate');
 
 // Proxies the free Dictionary API (which has no CORS headers) so the frontend can call it.
 dictionary.get('/lookup/:word', async (req, res) => {
@@ -38,7 +39,7 @@ dictionary.get('/:word', async (req, res) => {
   }
 });
 
-dictionary.post('/', async (req, res) => {
+dictionary.post('/', authenticate, async (req, res) => {
   try {
     const data = await createWord(req.body);
     res.status(200).json({ success: true, payload: data });
@@ -47,7 +48,7 @@ dictionary.post('/', async (req, res) => {
   }
 });
 
-dictionary.put('/:dictionaryId', async (req, res) => {
+dictionary.put('/:dictionaryId', authenticate, async (req, res) => {
   try {
     const data = await updateWord(req.body, req.params.dictionaryId);
     res.status(200).json({ success: true, payload: data });
@@ -56,7 +57,7 @@ dictionary.put('/:dictionaryId', async (req, res) => {
   }
 });
 
-dictionary.delete('/:id', async (req, res) => {
+dictionary.delete('/:id', authenticate, async (req, res) => {
   try {
     const data = await deleteWord(req.params.id);
     res.status(200).json({ success: true, payload: data });

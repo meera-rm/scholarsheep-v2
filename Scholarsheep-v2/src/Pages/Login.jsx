@@ -35,8 +35,6 @@ const Login = () => {
     }
   }, [isAuthenticated, user]);
 
-  if (isAuthenticated) return null;
-
   // React 19: useActionState replaces useState + handleSubmit + isSubmitting + error
   const [loginState, loginAction, isLoggingIn] = useActionState(
     async (prevState, formData) => {
@@ -67,6 +65,8 @@ const Login = () => {
   // For demo account auto-fill we need controlled inputs
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  if (isAuthenticated) return null;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-50 to-teal-100 px-4">

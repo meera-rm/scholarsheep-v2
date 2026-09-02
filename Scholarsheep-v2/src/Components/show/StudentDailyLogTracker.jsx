@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const StudentDailyLogTracker = ({ students }) => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
@@ -21,6 +22,12 @@ const StudentDailyLogTracker = ({ students }) => {
 
   useEffect(() => {
     if (!students || students.length === 0) return;
+
+    if (isDemoMode()) {
+      setLogData({});
+      return;
+    }
+
     setLoading(true);
 
     // Fetch logs for each student for the last 7 days

@@ -3,6 +3,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const NewComments = ({ student, log }) => {
   const navigate = useNavigate();
@@ -28,6 +29,10 @@ const NewComments = ({ student, log }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('inhandlesumbit', newComment);
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.');
+      return;
+    }
     api
       .post('/api/comments/new', newComment)
       .then(() => {

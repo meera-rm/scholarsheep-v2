@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 import { AiFillDelete } from 'react-icons/ai';
 import { BsPencilSquare } from 'react-icons/bs';
 import { BiArrowBack } from 'react-icons/bi';
@@ -32,6 +33,10 @@ const BookDetails = () => {
 
   //Delete functions
   const handleDelete = () => {
+    if (isDemoMode()) {
+      alert('This feature is not available in demo mode.');
+      return;
+    }
     api
       .delete(`/api/books/${id}`)
       .then(() => {

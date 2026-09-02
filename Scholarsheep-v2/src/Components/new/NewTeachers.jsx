@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import PhotoUpload from '../common/PhotoUpload';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const NewTeachers = () => {
   const navigate = useNavigate();
@@ -32,6 +33,10 @@ const NewTeachers = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('inhandlesumbit', teacher);
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.');
+      return;
+    }
     // httpService
     api.post('/api/teachers/new', {
         ...teacher,

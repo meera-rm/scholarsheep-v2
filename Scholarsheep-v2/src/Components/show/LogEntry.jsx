@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 import { MdAddComment } from 'react-icons/md';
 import Modal from '../features/Modal';
 
@@ -15,6 +16,10 @@ const LogEntry = ({ log, index ,student}) => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setComment({});
+      return;
+    }
     api
       .get(`/api/comments/logs/${log.log_id}`)
       .then((response) => {

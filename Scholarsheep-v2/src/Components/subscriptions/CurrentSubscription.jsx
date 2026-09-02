@@ -3,6 +3,7 @@ import api from '../../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import EditSubscriptions from './EditSubscription';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const currentSubs = ({
   setShowModal,
@@ -18,6 +19,19 @@ const currentSubs = ({
 
  
   const handleUnsubscribe = async () => {
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+      return;
+    }
     try {
       const res = await api.delete(`/api/subscriptions/unsubscribe/${currentEmail}`);
 

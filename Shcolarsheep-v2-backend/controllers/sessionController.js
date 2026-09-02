@@ -3,6 +3,8 @@ const router = express.Router();
 const Sessions = require('../queries/sessions');
 const ReadingLog = require('../queries/readingLog');
 const Notifications = require('../queries/notifications');
+const SessionComments = require('../queries/sessionComments');
+const ClassEnrollment = require('../queries/classEnrollment');
 const { checkAndAwardStickers } = require('../services/awardService');
 const { authenticate } = require('../middleware/authenticate');
 
@@ -53,6 +55,48 @@ router.get('/book/:bookId', async (req, res) => {
   try {
     const sessions = await Sessions.getByBook(req.user.id, req.params.bookId);
     res.json({ sessions });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// GET /api/sessions/student/:studentId — teacher view of one enrolled student's sessions
+router.get('/student/:studentId', async (req, res) => {
+  try {
+    const teachers = await ClassEnrollment.getTeachersOfStudent(req.params.studentId);
+    const isMyStudent = teachers.some((t) => t.teacher_id === req.user.id);
+    if (!isMyStudent) {
+      return res.status(403).json({ message: 'Not your student' });
+    }
+    const sessions = await Sessions.getByUser(req.params.studentId);
+    res.json({ sessions });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// GET /api/sessions/:id/comments — comments on a session
+router.get('/:id/comments', async (req, res) => {
+  try {
+    const comments = await SessionComments.getBySession(req.params.id);
+    res.json({ comments });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// POST /api/sessions/:id/comments — teacher comments on a student's session
+router.post('/:id/comments', async (req, res) => {
+  try {
+    if (req.user.role !== 'teacher') {
+      return res.status(403).json({ message: 'Only teachers can comment' });
+    }
+    const comment = await SessionComments.create({
+      session_id: req.params.id,
+      teacher_id: req.user.id,
+      comment: req.body.comment,
+    });
+    res.status(201).json({ comment });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

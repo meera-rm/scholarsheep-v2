@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../utils/axiosInstance';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const EditSubscriptions = ({
   editing,
@@ -109,6 +110,21 @@ const EditSubscriptions = ({
         draggable: true,
         progress: undefined,
       });
+    }
+
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+      setEmail('');
+      return;
     }
 
     try {

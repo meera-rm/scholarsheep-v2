@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../utils/axiosInstance';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const UpdateNotes = () => {
   const { id } = useParams();
@@ -11,6 +12,11 @@ const UpdateNotes = () => {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setTitle('');
+      setContent('');
+      return;
+    }
     api
       .get(`/api/notes/${id}`)
       .then((res) => {
@@ -25,6 +31,10 @@ const UpdateNotes = () => {
     e.preventDefault();
     if (!content.trim()) {
       toast.error('Note content cannot be empty');
+      return;
+    }
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.');
       return;
     }
     setSaving(true);

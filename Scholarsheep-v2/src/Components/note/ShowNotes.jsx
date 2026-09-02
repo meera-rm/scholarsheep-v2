@@ -3,6 +3,8 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import api from '../../utils/axiosInstance';
 import ReactHtmlParser from 'html-react-parser';
 import DOMPurify from 'dompurify';
+import { toast } from 'react-toastify';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const ShowNotes = () => {
   const [note, setNote] = useState(null);
@@ -10,12 +12,20 @@ const ShowNotes = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setNote(null);
+      return;
+    }
     api.get(`/api/notes/${id}`)
       .then((response) => setNote(response.data.payload))
       .catch(() => navigate('/not-found'));
   }, [id, navigate]);
 
   const handleDelete = () => {
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.');
+      return;
+    }
     if (!window.confirm('Delete this note?')) return;
     api
       .delete(`/api/notes/${id}`)

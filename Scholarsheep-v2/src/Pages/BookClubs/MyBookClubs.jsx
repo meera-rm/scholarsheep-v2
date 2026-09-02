@@ -13,10 +13,10 @@ const MyBookClubs = () => {
     getAllClubs().then(setClubs);
   }, []);
 
-  const handleJoin = (e) => {
+  const handleJoin = async (e) => {
     e.preventDefault();
     if (!inviteCode.trim()) return;
-    const result = joinClub(inviteCode.trim().toUpperCase(), user?.username || 'student');
+    const result = await joinClub(inviteCode.trim().toUpperCase(), user?.username || 'student');
     if (result.error) {
       toast.error(result.error);
     } else {
@@ -80,7 +80,10 @@ const MyBookClubs = () => {
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-800 truncate">{club.name}</h3>
                       {club.bookTitle && <p className="text-xs text-teal-600">Reading: {club.bookTitle}</p>}
-                      <p className="text-xs text-gray-400 mt-1">{club.members.length} member{club.members.length !== 1 ? 's' : ''}</p>
+                      {(() => {
+                        const count = club.memberCount ?? club.members?.length ?? 0;
+                        return <p className="text-xs text-gray-400 mt-1">{count} member{count !== 1 ? 's' : ''}</p>;
+                      })()}
                     </div>
                   </div>
                   {club.description && (

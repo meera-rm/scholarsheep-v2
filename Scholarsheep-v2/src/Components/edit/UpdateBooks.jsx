@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../utils/axiosInstance';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const UpdateBooks = () => {
   let { id } = useParams();
@@ -25,7 +27,8 @@ const UpdateBooks = () => {
       })
       .catch((e) => console.error(e));
     console.log('data=', book);
-  }, [id, book]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   const onInputChange = (event) => {
     console.log(event.target.value);
@@ -37,6 +40,10 @@ const UpdateBooks = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.');
+      return;
+    }
     api
       .put(`/api/books/${id}`, book)
       .then((res) => {

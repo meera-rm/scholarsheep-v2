@@ -3,6 +3,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import PhotoUpload from '../common/PhotoUpload';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const NewStudents = (props) => {
   const navigate = useNavigate();
@@ -32,6 +33,10 @@ const NewStudents = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.');
+      return;
+    }
     api
       .post('/api/students/new', {
         ...student,

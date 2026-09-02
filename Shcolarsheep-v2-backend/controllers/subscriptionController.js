@@ -1,6 +1,9 @@
 const express = require('express');
 const subscriptions = express.Router();
 const { getAllSubscriptions, getASubscription, createSubscription, updateSubscription, deleteSubscription } = require('../queries/subscriptions');
+const { authenticate } = require('../middleware/authenticate');
+
+subscriptions.use(authenticate);
 
 subscriptions.get('/', async (req, res) => {
   try {

@@ -15,7 +15,7 @@ api.interceptors.request.use(
   (config) => {
     const token = getToken();
     if (token && !isTokenExpired(token)) {
-      config.headers.Authorization = token;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },

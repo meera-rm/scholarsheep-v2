@@ -1,6 +1,9 @@
 const express = require('express');
 const comments = express.Router({ mergeParams: true });
 const { getAllComments, getComment, newComment, updateComment, deleteComment } = require('../queries/comments');
+const { authenticate } = require('../middleware/authenticate');
+
+comments.use(authenticate);
 
 comments.get('/', async (req, res) => {
   try {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 import { AiFillDelete } from 'react-icons/ai';
 import { BsPencilSquare } from 'react-icons/bs';
 import { BiArrowBack } from 'react-icons/bi';
@@ -14,15 +15,19 @@ const CommentDetails = () => {
   let { id } = useParams();
 
   useEffect(() => {
-    api.get(`/api/logs/${id}`)
+    api.get(`/api/comments/${id}`)
       .then((response) => {
-        setComment(response.data);
+        setComment(response.data.payload);
       })
       .catch(() => navigate('/not-found'));
   }, [id, navigate, comment]);
 
   //Delete functions
   const handleDelete = () => {
+    if (isDemoMode()) {
+      alert('This feature is not available in demo mode.');
+      return;
+    }
     api.delete(`/api/comments/${id}`)
       .then(() => {
         navigate('/comments');
@@ -66,7 +71,7 @@ const CommentDetails = () => {
         <div className=' mt-10 flex justify-center ml-6 space-x-6'>
           <div>
             {' '}
-            <Link to={'/students'}>
+            <Link to={'/comments'}>
               {/* <button className=' bg-teal-500 px-6 py-4 text-white rounded '>
                 Back{' '}
               </button> */}
@@ -75,7 +80,7 @@ const CommentDetails = () => {
           </div>
           <div>
             {' '}
-            <Link to={`/students/${id}/edit`}>
+            <Link to={`/comments/${id}/edit`}>
               {/* <button className=' bg-teal-500 px-6 py-4 text-white rounded '>
                 Edit{' '}
               </button> */}
@@ -84,15 +89,13 @@ const CommentDetails = () => {
           </div>
           <div>
             {' '}
-            <Link to={'/students'}>
-              {/* <button
+            {/* <button
                 className='bg-teal-500 px-6 py-4 text-white rounded'
                 onClick={handleDelete}
               >
                 Delete
               </button> */}
-                <AiFillDelete className='cursor-pointer' onClick={handleDelete} />
-            </Link>
+              <AiFillDelete className='cursor-pointer' onClick={handleDelete} />
           </div>
         </div>
       </article>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const StudentDetails = () => {
   const [student, setStudent] = useState({});
@@ -10,6 +11,12 @@ const StudentDetails = () => {
   let { id } = useParams();
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setStudent({});
+      setLogData([]);
+      return;
+    }
+
     api
       .get(`/api/students/${id}`)
       .then((response) => setStudent(response.data.payload))
@@ -23,6 +30,10 @@ const StudentDetails = () => {
 
   // Fetch comments for each log
   useEffect(() => {
+    if (isDemoMode()) {
+      setComments({});
+      return;
+    }
     if (logData.length === 0) return;
     const fetchComments = async () => {
       const map = {};
@@ -40,6 +51,10 @@ const StudentDetails = () => {
   }, [logData]);
 
   const handleDelete = () => {
+    if (isDemoMode()) {
+      alert('This feature is not available in demo mode.');
+      return;
+    }
     if (!window.confirm(`Delete student ${student.student_name}?`)) return;
     api
       .delete(`/api/students/${id}`)

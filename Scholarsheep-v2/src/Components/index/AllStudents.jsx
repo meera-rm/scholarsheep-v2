@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const AllStudents = () => {
   const [students, setStudents] = useState([]);
   let { teacherId } = useParams();
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setStudents([]);
+      return;
+    }
     api.get('/api/students')
       .then((response) => setStudents(response.data.payload || []))
       .catch((e) => console.error('catch', e));

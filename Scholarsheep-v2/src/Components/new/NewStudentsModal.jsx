@@ -4,6 +4,7 @@ import {ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 // import httpService from '../httpService';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const NewStudentsModal = (props) => {
   const navigate = useNavigate();
@@ -35,6 +36,10 @@ const NewStudentsModal = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('inhandlesumbit', student);
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.');
+      return;
+    }
     //  httpService
     api.post('/api/students/new', student)
       .then(() => {

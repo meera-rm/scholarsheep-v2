@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../utils/axiosInstance';
 import DOMPurify from 'dompurify';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
+    if (isDemoMode()) {
+      setNotes([]);
+      return;
+    }
     api.get(`/api/notes`)
       .then((response) => setNotes(response.data.payload || []))
       .catch((e) => console.log('catch', e));

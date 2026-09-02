@@ -31,7 +31,7 @@ const PaintApp=()=>{
                 brushWidth={brushWidth}
                 setBrushWidth={setBrushWidth}
                 />
-             <BrushSize brushWidth={brushWidth}  setBrushWidth={setBrushWidth}/>
+             <BrushSize brushWidth={brushWidth}  setBrushWidth={setBrushWidth} setSelectedTool={setSelectedTool}/>
               
         </div>
     )

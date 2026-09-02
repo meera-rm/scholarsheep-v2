@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const UnsubscriptionModal = ({
   setShowModal,
@@ -48,7 +49,19 @@ const UnsubscriptionModal = ({
     }, 2000);
   };
   const handleUnsubscribe =  () => {
-    
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+      return;
+    }
     try {
       // Send a request to your server to unsubscribe the user
       const res =  api.delete(`/api/subscriptions/unsubscribe/${email}`);

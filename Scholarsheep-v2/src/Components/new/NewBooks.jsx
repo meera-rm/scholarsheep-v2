@@ -4,6 +4,7 @@ import {ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 // import httpService from '../httpService';
 import api from '../../utils/axiosInstance';
+import { isDemoMode } from '../../services/demoAuthService';
 
 const NewBooks = () => {
   const navigate = useNavigate();
@@ -36,6 +37,11 @@ const NewBooks = () => {
     event.preventDefault();
    
     console.log('inhandlesumbit', newBook);
+
+    if (isDemoMode()) {
+      toast.info('This feature is not available in demo mode.');
+      return;
+    }
 
     //  httpService
     api.post('/api/books/new', newBook)

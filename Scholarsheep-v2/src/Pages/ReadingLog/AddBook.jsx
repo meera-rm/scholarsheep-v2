@@ -17,27 +17,27 @@ const AddBook = () => {
     status: 'want_to_read',
   });
 
-  const handleAddBook = (book) => {
-    const entry = addBook(book);
+  const handleAddBook = async (book) => {
+    const entry = await addBook(book);
     toast.success(`"${entry.title}" added to your books!`);
 
     // Check for new awards
-    const awards = checkAwards();
+    const awards = await checkAwards();
     if (awards.length > 0) {
       setNewAward(awards[0]);
     }
   };
 
-  const handleManualSubmit = (e) => {
+  const handleManualSubmit = async (e) => {
     e.preventDefault();
     if (!manualBook.title.trim()) return;
-    const entry = addBook({
+    const entry = await addBook({
       ...manualBook,
       pageCount: parseInt(manualBook.pageCount) || 0,
     });
     toast.success(`"${entry.title}" added to your books!`);
     setManualBook({ title: '', author: '', pageCount: '', genre: '', status: 'want_to_read' });
-    const awards = checkAwards();
+    const awards = await checkAwards();
     if (awards.length > 0) setNewAward(awards[0]);
   };
 
